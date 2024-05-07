@@ -1,8 +1,9 @@
-import React from "react";
 import logo from "../assets/logo.png";
-import './styles/login.css'
+import './styles/login.css';
 function Login() {
   return (
+    <body className="loginBody">   
+
     <main className="form-signin w-100 m-auto">
       <form>
         <div className="container d-flex justify-content-center">
@@ -22,7 +23,7 @@ function Login() {
             id="floatingInput"
             placeholder="name@example.com"
           />
-          <label for="floatingInput">Correo electronico</label>
+          <label htmlFor="floatingInput">Correo electronico</label>
         </div>
         <div className="form-floating">
           <input
@@ -31,7 +32,7 @@ function Login() {
             id="floatingPassword"
             placeholder="Password"
           />
-          <label for="floatingPassword">Contraseña</label>
+          <label htmlFor="floatingPassword">Contraseña</label>
         </div>
         <div className="form-check text-start my-3">
           <input
@@ -40,7 +41,7 @@ function Login() {
             value="remember-me"
             id="flexCheckDefault"
           />
-          <label className="form-check-label text-white" for="flexCheckDefault">
+          <label className="form-check-label text-white" htmlFor="flexCheckDefault">
             Recuerdame
           </label>
         </div>
@@ -49,5 +50,6 @@ function Login() {
         </button>
       </form>
     </main>
+    </body>
   );}
   export default Login

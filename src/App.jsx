@@ -1,4 +1,3 @@
-import React from "react";
 import Navbar from "./components/templates/Navbar";
 import Footer from "./components/templates/Footer";
 import Login from "./components/Login";
@@ -15,8 +14,6 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<SignIn />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} /> {/* Ruta para manejar páginas no encontradas */}
       </Routes>

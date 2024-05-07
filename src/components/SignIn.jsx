@@ -1,4 +1,3 @@
-import React from "react";
 import "./styles/login.css";
 import logo from "../assets/logo.png";
 function SignIn() {
@@ -23,7 +22,7 @@ function SignIn() {
             name="nombre"
             placeholder="Nombre"
           />
-          <label for="nombre">Nombre</label>
+          <label htmlFor="nombre">Nombre</label>
         </div>
         <div className="form-floating">
           <input
@@ -33,7 +32,7 @@ function SignIn() {
             name="apellido"
             placeholder="Apellidos"
           />
-          <label for="apellido">Apellidos</label>
+          <label htmlFor="apellido">Apellidos</label>
         </div>
         <div className="form-floating">
           <input
@@ -43,7 +42,7 @@ function SignIn() {
             name="email"
             placeholder="name@example.com"
           />
-          <label for="email">Correo electronico</label>
+          <label htmlFor="email">Correo electronico</label>
         </div>
         <div className="form-floating">
           <input
@@ -53,7 +52,7 @@ function SignIn() {
             name="password"
             placeholder="Password"
           />
-          <label for="password">Contraseña</label>
+          <label htmlFor="password">Contraseña</label>
         </div>
         <div className="form-floating">
           <select id="nacionalidad" name="nacionalidad" className="form-select">
@@ -87,7 +86,7 @@ function SignIn() {
             <option value="eslovenia">Eslovenia</option>
             <option value="suiza">Suiza</option>
           </select>
-          <label for="nacionalidad">Nacionalidad</label>
+          <label htmlFor="nacionalidad">Nacionalidad</label>
         </div>
         <button className="btn btn-primary w-100 py-2 mt-3" type="submit">
           Registrarse{" "}

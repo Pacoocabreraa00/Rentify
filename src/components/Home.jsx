@@ -1,9 +1,8 @@
 // Footer.jsx
-import React from "react";
 
 function Home() {
   return (
-    <main className="container mt-4">
+    <main className="containerApp mt-4">
         <section>
             <h2 className="mb-4">¡Bienvenido a la Plataforma de Gestión de Alquileres!</h2>
             <p>En esta plataforma podrás administrar todas tus propiedades, inquilinos, contratos y pagos de alquiler de manera fácil y eficiente.</p>
