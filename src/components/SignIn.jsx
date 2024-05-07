@@ -1,18 +1,11 @@
 import "./styles/login.css";
-import logo from "../assets/logo.png";
+import ImagenLogo from "./templates/small_components/ImagenLogo";
 function SignIn() {
   return (
+    <body className="loginBody">
     <main className="form-signin w-100 m-auto ">
       <form action="PHP\Archivos comunes\controlReg.php" method="POST">
-        <div className="container d-flex justify-content-center">
-          <img
-            className="mb-4 img-fluid"
-            src={logo}
-            alt=""
-            width="100"
-            height="100"
-          />
-        </div>
+        <ImagenLogo />
         <h1 className="h3 mb-3 fw-normal text-white">Regístrate</h1>
         <div className="form-floating">
           <input
@@ -93,6 +86,7 @@ function SignIn() {
         </button>
       </form>
     </main>
+    </body>
   );
 }
 export default SignIn;

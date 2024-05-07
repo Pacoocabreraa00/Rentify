@@ -1,20 +1,13 @@
-import logo from "../assets/logo.png";
 import './styles/login.css';
+import ImagenLogo from './templates/small_components/ImagenLogo';
 function Login() {
   return (
     <body className="loginBody">   
-
+    
     <main className="form-signin w-100 m-auto">
       <form>
-        <div className="container d-flex justify-content-center">
-          <img
-            className="mb-4 img-fluid"
-            src={logo}
-            alt=""
-            width="100"
-            height="100"
-          />
-        </div>
+        
+      <ImagenLogo/>
         <h1 className="h3 mb-3 fw-normal text-white">Iniciar sesión</h1>
         <div className="form-floating">
           <input
@@ -34,18 +27,8 @@ function Login() {
           />
           <label htmlFor="floatingPassword">Contraseña</label>
         </div>
-        <div className="form-check text-start my-3">
-          <input
-            className="form-check-input"
-            type="checkbox"
-            value="remember-me"
-            id="flexCheckDefault"
-          />
-          <label className="form-check-label text-white" htmlFor="flexCheckDefault">
-            Recuerdame
-          </label>
-        </div>
-        <button className="btn btn-primary w-100 py-2" type="submit">
+        
+        <button className="btn btn-primary w-100 pt-2 mt-5" type="submit">
           Iniciar sesión
         </button>
       </form>
