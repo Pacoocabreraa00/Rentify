@@ -1,10 +1,42 @@
-import "./styles/login.css";
-import ImagenLogo from "./templates/small_components/ImagenLogo";
-function SignIn() {
+import { useState } from 'react';
+import axios from 'axios';
+import ImagenLogo from './templates/small_components/ImagenLogo';
+import './styles/login.css'
+
+function Formulario() {
+  const [form, setForm] = useState({
+    nombre: '',
+    apellido: '',
+    email: '',
+    password: '',
+    nacionalidad: 'espana', // Valor por defecto
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post('/registro', form);
+
+      if (response.status === 200) {
+        console.log('Datos enviados correctamente');
+        // Aquí podrías redirigir a una página de éxito o realizar otras acciones necesarias
+      } else {
+        console.error('Error al enviar datos');
+      }
+    } catch (error) {
+      console.error('Error al enviar datos:', error);
+    }
+  };
+
   return (
     <body className="loginBody">
     <main className="form-signin w-100 m-auto ">
-      <form action="PHP\Archivos comunes\controlReg.php" method="POST">
+      <form onSubmit={handleSubmit}>
         <ImagenLogo />
         <h1 className="h3 mb-3 fw-normal text-white">Regístrate</h1>
         <div className="form-floating">
@@ -14,6 +46,8 @@ function SignIn() {
             id="nombre"
             name="nombre"
             placeholder="Nombre"
+            value={form.nombre}
+            onChange={handleChange}
           />
           <label htmlFor="nombre">Nombre</label>
         </div>
@@ -24,6 +58,8 @@ function SignIn() {
             id="apellido"
             name="apellido"
             placeholder="Apellidos"
+            value={form.apellido}
+            onChange={handleChange}
           />
           <label htmlFor="apellido">Apellidos</label>
         </div>
@@ -34,6 +70,8 @@ function SignIn() {
             id="email"
             name="email"
             placeholder="name@example.com"
+            value={form.email}
+            onChange={handleChange}
           />
           <label htmlFor="email">Correo electronico</label>
         </div>
@@ -44,11 +82,13 @@ function SignIn() {
             id="password"
             name="password"
             placeholder="Password"
+            value={form.password}
+            onChange={handleChange}
           />
           <label htmlFor="password">Contraseña</label>
         </div>
         <div className="form-floating">
-          <select id="nacionalidad" name="nacionalidad" className="form-select">
+          <select id="nacionalidad" name="nacionalidad" className="form-select" value={form.nacionalidad} onChange={handleChange}>
             <option value="espana">España</option>
             <option value="alemania">Alemania</option>
             <option value="francia">Francia</option>
@@ -86,7 +126,9 @@ function SignIn() {
         </button>
       </form>
     </main>
-    </body>
+  </body>
+
   );
 }
-export default SignIn;
+
+export default Formulario;
