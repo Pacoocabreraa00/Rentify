@@ -28,7 +28,7 @@ function App() {
 // Importa las bibliotecas necesarias y configura la conexión
 import { createClient } from "@libsql/client";
 
-export const db = createClient({
+const db = createClient({
   url: "libsql://content-starwoman-pacoocabreraa00.turso.io",
   authToken:
     "eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE3MTUyNjYwNDIsImlkIjoiYTVjZGM2ZDUtZWMzNS00MGVhLWEzYTMtMTNiMmJmNGE4YzljIn0.5hA4F0f0tgj0DXXnAcefRI2QL6G4idKKQxR-ufYA0a_7P6X5iWxCfw4F3L1UmsQOhBnX06yHeFj6a7grUeXGCw",
