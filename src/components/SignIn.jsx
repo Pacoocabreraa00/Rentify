@@ -31,7 +31,7 @@ function Formulario() {
     const Json = JSON.parse(response.config.data);
     try {
       const insertQuery = `INSERT INTO users (nombre, apellido, email, password, nacionalidad) VALUES (?, ?, ?, ?, ?)`;
-      db.query(
+      await db.query(
         insertQuery,
         [Json.nombre, Json.apellido, Json.email, Json.password, Json.nacionalidad],
         (err, result) => {
