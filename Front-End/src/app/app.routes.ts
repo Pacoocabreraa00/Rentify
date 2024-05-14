@@ -5,6 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './guard/guard.guard';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
+import { PropiedadesComponent } from './propiedades/propiedades.component';
 
 export const routes: Routes = [
   {
@@ -20,14 +21,18 @@ export const routes: Routes = [
     path: 'registro',
     component: SignUpComponent,
     // canActivate: [AuthGuard]
-  },
-  {
-    path: '**',
-    component: NotFoundComponent,
-  },
-  {
+  },{
     path: 'chat',
     component: ChatComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path:'propiedades',
+    component: PropiedadesComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundComponent,
+  }
+  
 ];

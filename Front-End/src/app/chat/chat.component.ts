@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 
-interface Message {
+interface Mensaje {
   text: string;
   username: string;
 }
@@ -12,8 +12,8 @@ interface Message {
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  messages: Message[] = [];
-  newMessage: string = '';
+  mensajes: Mensaje[] = [];
+  nuevoMensaje: string = '';
   socket!: Socket;
 
   constructor() {
@@ -23,40 +23,39 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.socket = io({
       auth: {
-        username: this.getUsername(),
+        username: this.obtenerNombreUsuario(),
         serverOffset: 0
       }
     });
 
     this.socket.on('chat message', (msg: string, serverOffset: number, username: string) => {
-      const newMsg: Message = {
+      const nuevoMensaje: Mensaje = {
         text: msg,
         username: username
       };
-      this.messages.push(newMsg);
+      this.mensajes.push(nuevoMensaje);
       (this.socket as any).auth.serverOffset = serverOffset;
-      // scroll to bottom of messages
       setTimeout(() => {
-        const messagesElement = document.getElementById('messages');
-        if (messagesElement) {
-          messagesElement.scrollTop = messagesElement.scrollHeight;
+        const mensajesElement = document.getElementById('messages');
+        if (mensajesElement) {
+          mensajesElement.scrollTop = mensajesElement.scrollHeight;
         }
       });
     });
   }
 
   sendMessage(): void {
-    if (this.newMessage.trim() !== '') {
-      this.socket.emit('chat message', this.newMessage.trim());
-      this.newMessage = '';
+    if (this.nuevoMensaje.trim() !== '') {
+      this.socket.emit('chat message', this.nuevoMensaje.trim());
+      this.nuevoMensaje = '';
     }
   }
 
-  getUsername(): string {
-    const username = localStorage.getItem('username');
-    if (username) {
-      console.log(`User existed ${username}`);
-      return username;
+  obtenerNombreUsuario(): string {
+    const nombreUsuario = localStorage.getItem('username');
+    if (nombreUsuario) {
+      console.log(`Usuario existente ${nombreUsuario}`);
+      return nombreUsuario;
     } else {
       this.fetchRandomUsername();
       return '';
@@ -64,9 +63,12 @@ export class ChatComponent implements OnInit {
   }
 
   async fetchRandomUsername(): Promise<void> {
-    const res = await fetch('https://random-data-api.com/api/users/random_user');
-    const { username: randomUsername } = await res.json();
-    localStorage.setItem('username', randomUsername);
-    console.log(`New username set: ${randomUsername}`);
+    try {
+      const res = await fetch('https://random-data-api.com/api/users/random_user');
+      const { username: nombreUsuarioAleatorio } = await res.json();
+      localStorage.setItem('username', nombreUsuarioAleatorio);
+      console.log(`Nuevo nombre de usuario establecido: ${nombreUsuarioAleatorio}`);
+    } catch (error) {
+      console.error('Error al obtener el nombre de usuario:', error);
   }
-}
+}}
