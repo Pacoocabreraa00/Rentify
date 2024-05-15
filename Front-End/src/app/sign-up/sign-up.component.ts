@@ -4,17 +4,16 @@ import { AuthService } from '../services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
-
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,NgIf,RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './sign-up.component.html',
-  styleUrl: './sign-up.component.css'
+  styleUrl: './sign-up.component.css',
 })
 export class SignUpComponent {
   usuario = {
-    nombre: '',
+    name: '',
     email: '',
     password: '',
     nacionalidad: '',
@@ -23,15 +22,21 @@ export class SignUpComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
-  login() {
-    this.auth.usuarioLogin(this.usuario).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.TOKEN);
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        console.log(err);
-        this.err = err.error;
-      },
-    });
-}}
+  signUp() {
+    console.log(this.usuario.name)
+    this.auth.signUpUser(this.usuario)
+      .subscribe(
+        {
+          next: (res: any) => {
+            console.log(res);
+            localStorage.setItem('token', res.TOKEN);
+            this.router.navigate(['/']);
+          },
+          error: (err) => {
+            this.err = err.error.error;
+            console.log(err);
+          }
+        }
+      )
+  }
+}
