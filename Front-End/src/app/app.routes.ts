@@ -6,6 +6,7 @@ import { AuthGuard } from './guard/guard.guard';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { ChatComponent } from './chat/chat.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
+import { CrearPropiedadComponent } from './propiedades/crear-propiedad/crear-propiedad.component';
 
 export const routes: Routes = [
   {
@@ -20,19 +21,22 @@ export const routes: Routes = [
   {
     path: 'registro',
     component: SignUpComponent,
-    // canActivate: [AuthGuard]
-  },{
+  },
+  {
     path: 'chat',
     component: ChatComponent,
     canActivate: [AuthGuard],
   },
   {
-    path:'propiedades',
+    path: 'propiedades/crear-propiedad',
+    component: CrearPropiedadComponent,
+  },
+  {
+    path: 'propiedades',
     component: PropiedadesComponent,
   },
   {
     path: '**',
     component: NotFoundComponent,
-  }
-  
+  },
 ];

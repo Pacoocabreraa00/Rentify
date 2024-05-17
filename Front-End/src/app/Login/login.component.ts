@@ -21,10 +21,17 @@ export class LoginComponent {
 
   constructor(private auth: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    if (localStorage.getItem('token')) {
+      this.router.navigate(['/']);
+    }
+  }
+
   login() {
     this.auth.usuarioLogin(this.usuario).subscribe({
       next: (res) => {
         localStorage.setItem('token', res.TOKEN);
+        localStorage.setItem('id', JSON.stringify(res.USER.id) ),
         this.router.navigate(['/']);
       },
       error: (err) => {

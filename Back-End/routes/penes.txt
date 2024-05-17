@@ -1,0 +1,42 @@
+aqui haces lo mismo que en user.js con la ruta post y get, despues con la ruta post subes todo lo que TimeRanges, ok
+y despues en angular te creas un servicio con el metodo get para que te saque todas las propiedades, te pongo aqui un ejemplo
+en el servicio de angular pones algo asi 
+getAlbums() {
+    return this.http.get<any>(this.getAlbumsUrl)
+  } eso devuelve todos los albumes en mi tfg por ejemplo
+  despues en el .ts de las propiedades lo llamas
+  albums: any[] = []
+  album = {
+    name: '',
+    artist: '',
+    date: '',
+    picture: '',
+    link: ''
+  }
+
+  
+  constructor(private service: AlbumsService, private spotify: SpotifyService) { }
+
+  ngOnInit() {
+     this.service.getAlbums() 
+      .subscribe({
+        next: (res) => {
+          this.albums = res
+        },
+        error: (err) => {
+          console.log(err)
+        }
+      })
+  }
+  y despues en el html lo muestras con un ngFor
+  <div class="col-md-3" *ngFor="let album of albums">
+      <div class="card albums mx-auto border border-dark" style="width: 25rem">
+        <img [src]="album.picture" class="card-img-top" width="400px" alt="Album Cover"/>
+        <div class="card-body mx-auto text-center">
+          <h2 class="card-title">{{ album.name }}</h2>
+          <p class="card-text">{{ album.artist }}</p>
+          <p class="card-text">{{ album.date }}</p>
+          <a [href]="album.link" class="btn btn-dark">Listen on Spotify</a>
+        </div>
+      </div>
+    </div>

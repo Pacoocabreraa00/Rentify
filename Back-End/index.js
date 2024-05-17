@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const user = require('../Back-End/routes/user');
 const auth = require('../Back-End/routes/auth');
+const propiedades = require('../Back-End/routes/propiedades');
+
 const cors = require('cors');
 
 const app = express();
@@ -10,6 +12,8 @@ app.use(express.json());
 //Definimos las rutas de la API
 app.use('/api/v1/user/', user);
 app.use('/api/v1/auth/', auth);
+app.use('/api/v1/propiedad/', propiedades);
+
 
 
 //Ponemos el puerto que queremos

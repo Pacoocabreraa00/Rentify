@@ -1,0 +1,214 @@
+<main class="flex items-center justify-center min-h-screen bg-gray-800 text-white">
+  <form
+    class="bg-gray-700 p-10 rounded-lg shadow-lg w-full max-w-2xl my-10 flex items-center flex-col"
+    (ngSubmit)="createPropiedad()"
+  >
+    <h2 class="text-3xl font-bold mb-8 text-center">Inserta una Propiedad</h2>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.nombre"
+        type="text"
+        name="nombre"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Nombre"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.tipo"
+        type="text"
+        name="tipo"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Tipo"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.direccion"
+        type="text"
+        name="direccion"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Dirección"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.ciudad"
+        type="text"
+        name="ciudad"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Ciudad"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.codigoPostal"
+        type="text"
+        name="codigoPostal"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Código Postal"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.pais"
+        type="text"
+        name="pais"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="País"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-32 my-4">
+      <textarea
+        [(ngModel)]="propiedad.descripcion"
+        name="descripcion"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Descripción"
+        required
+      ></textarea>
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.habitaciones"
+        type="number"
+        name="habitaciones"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Habitaciones"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.banos"
+        type="number"
+        name="banos"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Baños"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.superficie"
+        type="number"
+        name="superficie"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Superficie (m²)"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.plantas"
+        type="number"
+        name="plantas"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Plantas"
+        required
+      />
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <select
+        [(ngModel)]="propiedad.garaje"
+        name="garaje"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        required
+      >
+        <option value="" disabled selected>Garaje</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <select
+        [(ngModel)]="propiedad.piscina"
+        name="piscina"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        required
+      >
+        <option value="" disabled selected>Piscina</option>
+        <option value="si">Sí</option>
+        <option value="no">No</option>
+      </select>
+    </div>
+
+    <div class="w-full max-w-md p-9 bg-white rounded-lg shadow-lg my-5">
+      <h1 class="text-center text-2xl sm:text-2xl font-semibold mb-4 text-gray-800">
+        File Drop and Upload
+      </h1>
+      <div
+        class="bg-gray-100 p-8 text-center rounded-lg border-dashed border-2 border-gray-300 hover:border-blue-500 transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md"
+        id="dropzone"
+      >
+        <label for="fileInput" class="cursor-pointer flex flex-col items-center space-y-2">
+          <svg class="w-16 h-16 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            ></path>
+          </svg>
+          <span class="text-black">Drag and drop your files here</span>
+          <span class="text-black text-sm">(or click to select)</span>
+        </label>
+        <input type="file" id="fileInput" class="hidden" (change)="onFileSelected($event)" multiple />
+      </div>
+      <div class="mt-6 text-center text-black" id="fileList">
+        <p *ngFor="let file of selectedFiles">{{ file.name }} ({{ formatBytes(file.size) }})</p>
+      </div>
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <select
+        [(ngModel)]="propiedad.estado"
+        name="estado"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        required
+      >
+        <option value="" disabled selected>Estado</option>
+        <option value="nuevo">Nuevo</option>
+        <option value="buen estado">Buen estado</option>
+        <option value="mal estado">Mal Estado</option>
+        <option value="para reformar">Para reformar</option>
+      </select>
+    </div>
+
+    <div class="relative w-full min-w-[200px] h-12 my-4">
+      <input
+        [(ngModel)]="propiedad.fechaDisponibilidad"
+        type="date"
+        name="fechaDisponibilidad"
+        class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
+        placeholder="Fecha de Disponibilidad"
+        required
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="bg-violet-600 text-white font-bold py-2 px-4 rounded hover:bg-violet-700 transition duration-300 w-full"
+    >
+      Crear Propiedad
+    </button>
+  </form>
+</main>

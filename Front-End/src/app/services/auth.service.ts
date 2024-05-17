@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private signUpUrl = 'http://localhost:3000/api/v1/user/';
-  private loginUrl = 'http://localhost:3000/api/v1/auth/';
+  private signUpUrl = 'http://localhost:3000/api/v1/user/'
+  private loginUrl = 'http://localhost:3000/api/v1/auth/'
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,7 +22,7 @@ export class AuthService {
       map((response: any) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
-          localStorage.setItem('email', user.email); // Opcional: almacenar email del usuario
+          localStorage.setItem('id', user.__id); // Opcional: almacenar email del usuario
         }
         return response;
       })
@@ -35,11 +35,12 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
-    localStorage.removeItem('email');
+    localStorage.removeItem('id');
     this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
     return localStorage.getItem('token');
   }
+  
 }
