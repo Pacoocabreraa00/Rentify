@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 
@@ -8,6 +9,8 @@ interface Mensaje {
 
 @Component({
   selector: 'app-chat',
+  standalone: true,
+  imports: [NgFor],
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })

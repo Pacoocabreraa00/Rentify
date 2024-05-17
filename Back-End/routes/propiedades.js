@@ -25,10 +25,15 @@ router.post("/", async (req, res) => {
     estado: req.body.estado,
     fechaDisponibilidad: req.body.fechaDisponibilidad,
   });
-
-  // Guardar la propiedad en la base de datos
+try {
   const result = await propiedad.save();
-  res.status(200).send(result);
+  res.status(200).json('Propiedad registrada correctamente');
+} catch (error) {
+  res.status(500).send('Error al registrar la propiedad');
+  console.log(error)
+} // Close the try block
+
+// Guardar la propiedad en la base de datos
 });
 
 // Ruta para obtener todas las propiedades por propietario

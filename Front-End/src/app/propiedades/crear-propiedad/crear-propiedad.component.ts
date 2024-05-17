@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PropiedadService } from '../../services/propiedad.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-propiedad',
@@ -10,7 +11,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './crear-propiedad.component.html',
   styleUrls: ['./crear-propiedad.component.css']
 })
-export class CrearPropiedadComponent implements OnInit {
+export class CrearPropiedadComponent  {
   propiedad = {
     nombre: '',
     tipo: '',
@@ -23,44 +24,24 @@ export class CrearPropiedadComponent implements OnInit {
     banos: '',
     superficie: '',
     plantas: '',
-    garaje: '',
-    piscina: '',
+    garaje: false,
+    piscina: false,
     precioVenta: '',
-    imagenes: [],
+    imagenes: 'imagen de ejemplo',
     estado: '',
     fechaDisponibilidad: ''
   };
   selectedFiles: File[] = [];
 
-  constructor(private service: PropiedadService) {}
+  constructor(private service: PropiedadService, private router:Router) {}
 
-  ngOnInit() {
-    const dropzone = document.getElementById('dropzone')!;
-
-    dropzone.addEventListener('dragover', (e) => {
-      e.preventDefault();
-      dropzone.classList.add('border-blue-500', 'border-2');
-    });
-
-    dropzone.addEventListener('dragleave', () => {
-      dropzone.classList.remove('border-blue-500', 'border-2');
-    });
-
-    dropzone.addEventListener('drop', (e) => {
-      e.preventDefault();
-      dropzone.classList.remove('border-blue-500', 'border-2');
-
-      const files = e.dataTransfer?.files;
-      if (files) {
-        this.handleFiles(files);
-      }
-    });
-  }
+  
 
   createPropiedad() {
+
     this.service.postPropiedad(this.propiedad).subscribe({
       next: (res) => {
-        console.log(res);
+        this.router.navigate(['/propiedades']);
       },
       error: (err) => {
         console.log(err);

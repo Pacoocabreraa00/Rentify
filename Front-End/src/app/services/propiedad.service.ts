@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class PropiedadService {
-  getPropiedadesUrl = 'http://localhost:3000/api/v1/propiedades';
+  getPropiedadesUrl = 'http://localhost:3000/api/v1/propiedad';
 
   constructor(private http: HttpClient) {}
   getPropiedades(id: any) {
