@@ -1,7 +1,21 @@
-<main class="min-h-screen bg-gray-800">
-  <button class="bg-violet-600 text-white font-bold py-2 px-4 rounded float-right mr-5 mt-5"
-  routerLink="/propiedades/crear-propiedad"
-  >
-    Crear Propiedad
-  </button>
+<!-- propiedades.component.html -->
+<main class="min-h-screen bg-gray-700">
+  <div class="top-20 left-0 p-5 z-10">
+    <button
+      class="bg-violet-600 text-white font-bold py-2 px-4 rounded"
+      routerLink="/propiedades/crear-propiedad"
+    >
+      Crear Propiedad
+    </button>
+  </div>
+
+  <div class="pt-20 container mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <app-propiedad-card
+        *ngFor="let propiedad of propiedades"
+        [propiedad]="propiedad"
+        class="m-4"
+      ></app-propiedad-card>
+    </div>
+  </div>
 </main>

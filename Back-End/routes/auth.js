@@ -9,7 +9,8 @@ router.post('/',async(req,res)=>{
     if (user) {
         if (user.password !== req.body.password) return res.status(400).send('Username or password are not correct');
 
-        res.status(200).send({"TOKEN" : "TOKEN"});
+        res.status(200).send({"id": user._id});
+        
     }
     else {
         res.status(400).send('User does not exist')

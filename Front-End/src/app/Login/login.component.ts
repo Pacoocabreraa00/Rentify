@@ -22,22 +22,26 @@ export class LoginComponent {
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('id')) {
       this.router.navigate(['/']);
     }
   }
 
   login() {
     this.auth.usuarioLogin(this.usuario).subscribe({
-      next: (res) => {
-        localStorage.setItem('token', res.TOKEN);
-        localStorage.setItem('id', JSON.stringify(res.USER.id) ),
-        this.router.navigate(['/']);
+      next: (response) => {
+        if ( response.id) {
+          localStorage.setItem('id', response.id);
+          this.router.navigate(['/']);
+        } else {
+          console.error('Login response missing token or ID. Check API response structure.');
+        }
       },
-      error: (err) => {
-        console.log(err);
-        this.err = err.error;
+      error: (error) => {
+        console.error('Login failed:', error);
+        this.err = error.error || 'An error occurred during login.';
       },
     });
   }
+  
 }

@@ -15,5 +15,5 @@ import { FooterComponent } from "./common/footer/footer.component";
     imports: [RouterOutlet, HomeComponent, HeaderComponent, LoginComponent, SignUpComponent, FooterComponent]
 })
 export class AppComponent {
-  title = 'Front-End';
+title = 'Rentify';
 }

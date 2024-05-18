@@ -21,7 +21,7 @@ export class SignUpComponent {
   err: string = '';
   //Esto es el método de angular para cuando se carga el componente, como el main, es decir q si quieres algo q se ejecute al cargar la pagina va aqui dentro 
   ngOnInit() {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('id')) {
       this.router.navigate(['/']);
     }
   }
@@ -30,8 +30,7 @@ signUp() {
     console.log(this.usuario.name);
     this.auth.signUpUser(this.usuario).subscribe({
       next: (res: any) => {
-        console.log(res);
-        localStorage.setItem('token', res.TOKEN);
+        localStorage.setItem('id', res.id);
         this.router.navigate(['/']);
       },
       error: (err) => {

@@ -1,7 +1,9 @@
-<main class="flex items-center justify-center min-h-screen bg-gray-800 text-white">
+<main
+  class="flex items-center justify-center min-h-screen bg-gray-800 text-white"
+>
   <form
     class="bg-gray-700 p-10 rounded-lg shadow-lg w-full max-w-2xl my-10 flex items-center flex-col"
-    (ngSubmit)="createPropiedad()"
+    (submit)="createPropiedad()"
   >
     <h2 class="text-3xl font-bold mb-8 text-center">Inserta una Propiedad</h2>
 
@@ -142,9 +144,9 @@
         class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
         required
       >
-        <option value="" disabled selected>Garaje</option>
-        <option [value]=true >Sí</option>
-        <option [value]=false>No</option>
+        <option disabled selected>Garaje</option>
+        <option [value]="true">Sí</option>
+        <option>No</option>
       </select>
     </div>
 
@@ -154,14 +156,13 @@
         name="piscina"
         class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
         required
-        
       >
-        <option value="" disabled selected>Piscina</option>
-        <option [value]=true >Sí</option>
-        <option [value]=false>No</option>
+        <option [value]="" disabled selected>Piscina</option>
+        <option [value]="true">Sí</option>
+        <option>No</option>
       </select>
     </div>
-<!-- 
+    <!-- 
     <div class="w-full max-w-md p-9 bg-white rounded-lg shadow-lg my-5">
       <h1 class="text-center text-2xl sm:text-2xl font-semibold mb-4 text-gray-800">
         File Drop and Upload
@@ -216,7 +217,6 @@
     </div>
 
     <button
-      (click)="createPropiedad()"
       class="bg-violet-600 text-white font-bold py-2 px-4 rounded hover:bg-violet-700 transition duration-300 w-full"
     >
       Crear Propiedad

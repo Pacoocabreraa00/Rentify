@@ -12,25 +12,14 @@ export class AuthService {
   private loginUrl = 'http://localhost:3000/api/v1/auth/'
 
   constructor(private http: HttpClient, private router: Router) {}
+  usuarioLogin(user: any) {return this.http.post<any>(this.loginUrl, user)}
+  signUpUser(user: any){return this.http.post<any>(this.signUpUrl, user)}
 
-  signUpUser(user: any): Observable<any> {
-    return this.http.post<any>(this.signUpUrl, user);
-  }
-
-  usuarioLogin(user: any): Observable<any> {
-    return this.http.post<any>(this.loginUrl, user).pipe(
-      map((response: any) => {
-        if (response.token) {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('id', user.__id); // Opcional: almacenar email del usuario
-        }
-        return response;
-      })
-    );
-  }
+  
+  
 
   isLogged(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('id');
   }
 
   logout(): void {

@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { PropiedadService } from '../../services/propiedad.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { Propiedad } from '../../models/propiedad.model';
 
 @Component({
   selector: 'app-crear-propiedad',
@@ -11,60 +12,49 @@ import {Router } from '@angular/router';
   templateUrl: './crear-propiedad.component.html',
   styleUrls: ['./crear-propiedad.component.css']
 })
-export class CrearPropiedadComponent  {
-  propiedad = {
-    nombre: '',
-    tipo: '',
-    direccion: '',
-    ciudad: '',
-    codigoPostal: '',
-    pais: '',
-    descripcion: '',
-    habitaciones: '',
-    banos: '',
-    superficie: '',
-    plantas: '',
-    garaje: false,
-    piscina: false,
-    precioVenta: '',
-    imagenes: 'imagen de ejemplo',
-    estado: '',
-    fechaDisponibilidad: ''
-  };
+export class CrearPropiedadComponent {
+  propiedad = new Propiedad(
+    '', // id
+    '', // nombre
+    '', // tipo
+    '', // direccion
+    '', // ciudad
+    '', // codigoPostal
+    '', // pais
+    '', // descripcion
+    0, // habitaciones
+    0, // banos
+    0, // superficie
+    0, // plantas
+    false, // garaje
+    false, // piscina
+    0, // precioVenta
+    localStorage.getItem('id')||'', // propietario
+    ['imagen de ejemplo'], // imagenes
+    '', // estado
+    new Date() // fechaDisponibilidad
+  );
   selectedFiles: File[] = [];
 
-  constructor(private service: PropiedadService, private router:Router) {}
-
-  
+  constructor(private service: PropiedadService, private router: Router) {}
 
   createPropiedad() {
+    // Convertir la fecha de disponibilidad a un objeto Date
+    this.propiedad.fechaDisponibilidad = new Date(this.propiedad.fechaDisponibilidad);
 
+    console.log(this.propiedad);
     this.service.postPropiedad(this.propiedad).subscribe({
-      next: (res) => {
-        this.router.navigate(['/propiedades']);
+      next: (res: any) => {
+      this.router.navigate(['/propiedades']);
       },
-      error: (err) => {
-        console.log(err);
+      error: (err: any) => {
+      console.log(err);
       }
     });
   }
 
   onFileSelected(event: any) {
-    const files = event.target.files;
-    this.handleFiles(files);
-  }
-
-  handleFiles(files: FileList) {
-    this.selectedFiles = Array.from(files);
-  }
-
-  formatBytes(bytes: number): string {
-    if (bytes === 0) return '0 Bytes';
-
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    this.selectedFiles = Array.from(event.target.files);
+    // Procesar los archivos seleccionados según sea necesario
   }
 }
