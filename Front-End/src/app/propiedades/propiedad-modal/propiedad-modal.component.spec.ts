@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PropiedadWindowComponent } from './propiedad-window.component';
+import { PropiedadModalComponent } from './propiedad-modal.component';
 
-describe('PropiedadWindowComponent', () => {
-  let component: PropiedadWindowComponent;
-  let fixture: ComponentFixture<PropiedadWindowComponent>;
+describe('PropiedadModalComponent', () => {
+  let component: PropiedadModalComponent;
+  let fixture: ComponentFixture<PropiedadModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PropiedadWindowComponent]
+      imports: [PropiedadModalComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PropiedadWindowComponent);
+    fixture = TestBed.createComponent(PropiedadModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

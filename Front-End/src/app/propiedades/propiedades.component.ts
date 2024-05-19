@@ -5,16 +5,18 @@ import { RouterModule } from '@angular/router';
 import { PropiedadService } from '../services/propiedad.service';
 import { CardPropiedadesComponent } from './cards-propiedades/cards-propiedades.component';
 import { Propiedad } from '../models/propiedad.model';
+import { PropiedadModalComponent } from './propiedad-modal/propiedad-modal.component';
 
 @Component({
   selector: 'app-propiedades',
   standalone: true,
-  imports: [CommonModule, RouterModule, CardPropiedadesComponent],
+  imports: [CommonModule, RouterModule, CardPropiedadesComponent, PropiedadModalComponent],
   templateUrl: './propiedades.component.html',
   styleUrls: ['./propiedades.component.css']
 })
 export class PropiedadesComponent implements OnInit {
   propiedades: Propiedad[] = [];
+  selectedPropiedad: Propiedad | null = null;
 
   constructor(private service: PropiedadService) { }
 
@@ -27,5 +29,13 @@ export class PropiedadesComponent implements OnInit {
         console.error(err);
       }
     });
+  }
+
+  openModal(propiedad: Propiedad) {
+    this.selectedPropiedad = propiedad;
+  }
+
+  closeModal() {
+    this.selectedPropiedad = null;
   }
 }

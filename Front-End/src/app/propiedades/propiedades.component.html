@@ -1,4 +1,4 @@
-<!-- propiedades.component.html -->
+<!-- src/app/propiedades/propiedades.component.html -->
 <main class="min-h-screen bg-gray-700">
   <div class="top-20 left-0 p-5 z-10">
     <button
@@ -14,8 +14,10 @@
       <app-propiedad-card
         *ngFor="let propiedad of propiedades"
         [propiedad]="propiedad"
+        (readMore)="openModal(propiedad)"
         class="m-4"
       ></app-propiedad-card>
     </div>
+    <app-propiedad-modal *ngIf="selectedPropiedad" [propiedad]="selectedPropiedad" (close)="closeModal()"></app-propiedad-modal>
   </div>
 </main>

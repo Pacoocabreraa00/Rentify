@@ -9,13 +9,13 @@ export class Propiedad {
   codigoPostal: string;
   pais: string;
   descripcion: string;
-  habitaciones: number;
-  banos: number;
-  superficie: number;
-  plantas: number;
-  garaje: boolean;
-  piscina: boolean;
-  precioVenta: number;
+  habitaciones: number | null;
+  banos: number | null;
+  superficie: number | null;
+  plantas: number | null;
+  garaje: boolean | null;
+  piscina: boolean | null;
+  precioVenta: number | null;
   propietario: string;
   imagenes: string[];
   estado: string;
@@ -30,13 +30,13 @@ export class Propiedad {
     codigoPostal: string,
     pais: string,
     descripcion: string,
-    habitaciones: number,
-    banos: number,
-    superficie: number,
-    plantas: number,
-    garaje: boolean,
-    piscina: boolean,
-    precioVenta: number,
+    habitaciones: number | null,
+    banos: number | null,
+    superficie: number | null,
+    plantas: number | null,
+    garaje: boolean | null,
+    piscina: boolean | null,
+    precioVenta: number | null,
     propietario: string,
     imagenes: string[],
     estado: string,

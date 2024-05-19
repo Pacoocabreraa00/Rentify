@@ -1,4 +1,4 @@
-<!-- cards propiedades -->
+<!-- src/app/propiedades/cards-propiedades/cards-propiedades.component.html -->
 <ng-container *ngIf="propiedad">
   <div
     class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col justify-between"
@@ -25,7 +25,8 @@
           {{ propiedad.descripcion }}
         </p>
       </div>
-      <a
+      <button
+        (click)="onReadMore()"
         class="mt-auto inline-flex items-center px-3 py-2 text-sm font-medium text-center bg-violet-600 text-white rounded-lg hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-violet-300 dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-violet-500"
       >
         Leer más
@@ -44,10 +45,7 @@
             d="M1 5h12m0 0L9 1m4 4L9 9"
           />
         </svg>
-      </a>
+      </button>
     </div>
   </div>
-</ng-container>
-<ng-container *ngIf="!propiedad">
-  <h2>No tienes ninguna propiedad agregada</h2>
 </ng-container>

@@ -7,7 +7,7 @@ const validarCampos = (body) => {
   const camposRequeridos = [
     "nombre", "tipo", "direccion", "ciudad", "codigoPostal", 
     "pais", "descripcion", "habitaciones", "banos", "superficie", 
-    "plantas", "garaje", "piscina", "precioVenta", "imagenes", 
+    "plantas", "precioVenta", "imagenes", 
     "propietario", "estado", "fechaDisponibilidad"
   ];
 

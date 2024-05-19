@@ -22,14 +22,14 @@ export class CrearPropiedadComponent {
     '', // codigoPostal
     '', // pais
     '', // descripcion
-    0, // habitaciones
-    0, // banos
-    0, // superficie
-    0, // plantas
-    false, // garaje
-    false, // piscina
-    0, // precioVenta
-    localStorage.getItem('id')||'', // propietario
+    null, // habitaciones
+    null, // banos
+    null, // superficie
+    null, // plantas
+    null, // garaje
+    null, // piscina
+    null, // precioVenta
+    localStorage.getItem('id') || '', // propietario
     ['imagen de ejemplo'], // imagenes
     '', // estado
     new Date() // fechaDisponibilidad
@@ -45,10 +45,10 @@ export class CrearPropiedadComponent {
     console.log(this.propiedad);
     this.service.postPropiedad(this.propiedad).subscribe({
       next: (res: any) => {
-      this.router.navigate(['/propiedades']);
+        this.router.navigate(['/propiedades']);
       },
       error: (err: any) => {
-      console.log(err);
+        console.log(err);
       }
     });
   }
