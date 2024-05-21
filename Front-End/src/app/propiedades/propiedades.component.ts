@@ -31,7 +31,7 @@ export class PropiedadesComponent implements OnInit {
     });
   }
 
-  openModal(propiedad: Propiedad) {
+  openModal(propiedad: Propiedad) { 
     this.selectedPropiedad = propiedad;
   }
 

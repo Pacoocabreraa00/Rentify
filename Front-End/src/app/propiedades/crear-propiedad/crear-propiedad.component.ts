@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Propiedad } from '../../models/propiedad.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-crear-propiedad',
@@ -30,7 +31,7 @@ export class CrearPropiedadComponent {
     null, // piscina
     null, // precioVenta
     localStorage.getItem('id') || '', // propietario
-    ['imagen de ejemplo'], // imagenes
+    [], // imagenes
     '', // estado
     new Date() // fechaDisponibilidad
   );
@@ -38,23 +39,89 @@ export class CrearPropiedadComponent {
 
   constructor(private service: PropiedadService, private router: Router) {}
 
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) {
+      dropzone.classList.add('border-blue-500', 'border-2');
+    }
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) {
+      dropzone.classList.remove('border-blue-500', 'border-2');
+    }
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    const dropzone = document.getElementById('dropzone');
+    if (dropzone) {
+      dropzone.classList.remove('border-blue-500', 'border-2');
+    }
+    if (event.dataTransfer) {
+      const files = event.dataTransfer.files;
+      this.handleFiles(files);
+    }
+  }
+
+  onFileChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files) {
+      this.handleFiles(input.files);
+    }
+  }
+
+  handleFiles(files: FileList) {
+    this.selectedFiles = Array.from(files);
+  }
+
+  formatBytes(bytes: number) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
   createPropiedad() {
-    // Convertir la fecha de disponibilidad a un objeto Date
     this.propiedad.fechaDisponibilidad = new Date(this.propiedad.fechaDisponibilidad);
 
-    console.log(this.propiedad);
-    this.service.postPropiedad(this.propiedad).subscribe({
+    const formData: FormData = new FormData();
+    formData.append('nombre', this.propiedad.nombre);
+    formData.append('tipo', this.propiedad.tipo);
+    formData.append('direccion', this.propiedad.direccion);
+    formData.append('ciudad', this.propiedad.ciudad);
+    formData.append('codigoPostal', this.propiedad.codigoPostal);
+    formData.append('pais', this.propiedad.pais);
+    formData.append('descripcion', this.propiedad.descripcion);
+    formData.append('habitaciones', this.propiedad.habitaciones?.toString() || '');
+    formData.append('banos', this.propiedad.banos?.toString() || '');
+    formData.append('superficie', this.propiedad.superficie?.toString() || '');
+    formData.append('plantas', this.propiedad.plantas?.toString() || '');
+    formData.append('precioVenta', this.propiedad.precioVenta?.toString() || '');
+    formData.append('garaje', this.propiedad.garaje?.toString() || '');
+    formData.append('piscina', this.propiedad.piscina?.toString() || '');
+    formData.append('estado', this.propiedad.estado);
+    formData.append('fechaDisponibilidad', this.propiedad.fechaDisponibilidad.toISOString());
+    formData.append('propietario', this.propiedad.propietario);
+
+    for (const file of this.selectedFiles) {
+      formData.append('propertyImages', file, file.name);
+    }
+
+    this.service.postPropiedad(formData).subscribe({
       next: (res: any) => {
         this.router.navigate(['/propiedades']);
       },
-      error: (err: any) => {
-        console.log(err);
+      error: (err: HttpErrorResponse) => {
+        console.error(`Backend returned code ${err.status}, body was:`, err.error);
       }
     });
-  }
-
-  onFileSelected(event: any) {
-    this.selectedFiles = Array.from(event.target.files);
-    // Procesar los archivos seleccionados según sea necesario
   }
 }

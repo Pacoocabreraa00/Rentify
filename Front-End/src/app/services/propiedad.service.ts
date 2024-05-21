@@ -12,10 +12,12 @@ export class PropiedadService {
   constructor(private http: HttpClient) {}
 
   getPropiedades(userId: string | null): Observable<Propiedad[]> {
+    console.log(`Solicitando propiedad con ID: ${userId}`); 
     return this.http.get<Propiedad[]>(`${this.apiUrl}/${userId}`);
   }
 
-  postPropiedad(propiedad: Propiedad): Observable<Propiedad> {
+  postPropiedad(propiedad: FormData): Observable<Propiedad> {
     return this.http.post<Propiedad>(this.apiUrl, propiedad);
   }
+
 }
