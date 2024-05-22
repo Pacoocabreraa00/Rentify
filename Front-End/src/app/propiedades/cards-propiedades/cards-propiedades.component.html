@@ -1,12 +1,12 @@
 <!-- src/app/propiedades/cards-propiedades/cards-propiedades.component.html -->
 <ng-container *ngIf="propiedad">
   <div
-    class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col justify-between"
+    class="max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 h-full flex flex-col justify-between"
   >
     <a>
       <img
-        class="rounded-t-lg w-full"
-        [src]="propiedad.imagenes[0]"
+        class="rounded-t-lg rounded-lg w-full h-40 object-cover object-center"
+        [src]="getImageUrl(propiedad.imagenes[0])"
         alt="{{ propiedad.nombre }}"
       />
     </a>

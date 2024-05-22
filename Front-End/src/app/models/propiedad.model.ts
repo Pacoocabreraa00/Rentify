@@ -1,5 +1,4 @@
 // src/app/models/propiedad.model.ts
-
 export class Propiedad {
   id: string;
   nombre: string;
