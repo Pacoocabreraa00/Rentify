@@ -4,11 +4,10 @@ import { AuthService } from '../services/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
-
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,NgIf,RouterLink],
+  imports: [FormsModule, ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -30,11 +29,11 @@ export class LoginComponent {
   login() {
     this.auth.usuarioLogin(this.usuario).subscribe({
       next: (response) => {
-        if ( response.id) {
+        if (response.id) {
           localStorage.setItem('id', response.id);
           this.router.navigate(['/']);
         } else {
-          console.error('Login response missing token or ID. Check API response structure.');
+          console.error('Login response missing ID. Check API response structure.');
         }
       },
       error: (error) => {
@@ -43,5 +42,4 @@ export class LoginComponent {
       },
     });
   }
-  
 }

@@ -19,23 +19,29 @@ export class SignUpComponent {
     nacionalidad: '',
   };
   err: string = '';
-  //Esto es el método de angular para cuando se carga el componente, como el main, es decir q si quieres algo q se ejecute al cargar la pagina va aqui dentro 
+
+  constructor(private auth: AuthService, private router: Router) {}
+
   ngOnInit() {
     if (localStorage.getItem('id')) {
       this.router.navigate(['/']);
     }
   }
-  constructor(private auth: AuthService, private router: Router) {}
-signUp() {
-    console.log(this.usuario.name);
+
+  signUp() {
     this.auth.signUpUser(this.usuario).subscribe({
-      next: (res: any) => {
-        localStorage.setItem('id', res.id);
-        this.router.navigate(['/']);
+      next: (response) => {
+        console.log('Response from sign-up:', response); // Agrega esta línea para depurar
+        if (response.id) {
+          localStorage.setItem('id', response.id);
+          this.router.navigate(['/']);
+        } else {
+          console.error('Sign-up response missing ID. Check API response structure.');
+        }
       },
-      error: (err) => {
-        this.err = err.error.error;
-        console.log(err);
+      error: (error) => {
+        console.error('Sign-up failed:', error);
+        this.err = error.error || 'An error occurred during sign-up.';
       },
     });
   }

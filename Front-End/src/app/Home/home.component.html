@@ -16,67 +16,17 @@
       Ver mis propiedades
     </button>
   </section>
-
-  <section class="mt-16">
-    <h3 class="text-3xl font-bold">¿Por qué elegirnos?</h3>
-    <p class="mt-4 text-lg">
-      Te ofrecemos una solución completa y sencilla para gestionar tus
-      propiedades de forma eficiente y eficaz.
-    </p>
-    <ul class="mt-4 list-disc">
-      <li>Software gratuito y fácil de usar</li>
-      <li>Control total sobre tus inmuebles</li>
-      <li>Organización y seguimiento de tareas</li>
-      <li>Comunicación fluida con inquilinos</li>
-      <li>Acceso a informes y estadísticas</li>
-    </ul>
-  </section>
-
-  <section class="mt-16">
-    <h3 class="text-3xl font-bold">Funcionalidades destacadas</h3>
-    <div class="grid grid-cols-3 gap-4 mt-4">
-      <div class="bg-gray-700 shadow-md rounded-md p-4">
-        <h4 class="text-xl font-medium">Administración de inmuebles</h4>
-        <ul>
-          <li>Crea y edita perfiles de tus propiedades</li>
-          <li>Sube fotos y documentos importantes</li>
-          <li>Lleva un registro de los contratos de alquiler</li>
-          <li>Monitorea los pagos y gastos</li>
-        </ul>
+  <section>
+    <div class="pt-20 container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <app-propiedad-card
+          *ngFor="let propiedad of propiedades"
+          [propiedad]="propiedad"
+          (readMore)="openModal(propiedad)"
+          class="m-4"
+        ></app-propiedad-card>
       </div>
-      <div class="bg-gray-700 shadow-md rounded-md p-4">
-        <h4 class="text-xl font-medium">Gestión de inquilinos</h4>
-        <ul>
-          <li>Crea y administra perfiles de inquilinos</li>
-          <li>Registra pagos y depósitos</li>
-          <li>Envía notificaciones y avisos</li>
-          <li>Gestiona incidencias y reparaciones</li>
-        </ul>
-      </div>
-      <div class="bg-gray-700 shadow-md rounded-md p-4">
-        <h4 class="text-xl font-medium">Informes y estadísticas</h4>
-        <ul>
-          <li>Genera informes personalizados</li>
-          <li>Analiza el rendimiento de tus inversiones</li>
-          <li>Identifica tendencias y oportunidades</li>
-          <li>Toma decisiones informadas</li>
-        </ul>
-      </div>
+      <app-propiedad-modal *ngIf="selectedPropiedad" [propiedad]="selectedPropiedad" (close)="closeModal()"></app-propiedad-modal>
     </div>
-  </section>
-
-  <section class="mt-16 pb-10">
-    <h3 class="text-3xl font-bold">Únete a la comunidad</h3>
-    <p class="mt-4 text-lg">
-      Miles de propietarios ya utilizan nuestro software para gestionar sus
-      propiedades de forma eficiente. ¡Empieza a ahorrar tiempo y dinero hoy
-      mismo!
-    </p>
-    <button
-      class="mt-8 bg-violet-600 text-white font-medium py-2 px-4 rounded-md hover:bg-violet-700"
-      routerLink="/registro"
-    >
-      Regístrate gratis
-    </button>
   </section>
 </main>

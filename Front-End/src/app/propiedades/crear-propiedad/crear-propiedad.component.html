@@ -18,15 +18,43 @@
     </div>
 
     <div class="relative w-full min-w-[200px] h-12 my-4">
-      <input
+      <select
         [(ngModel)]="propiedad.tipo"
-        type="text"
         name="tipo"
         class="h-full w-full rounded-md border border-gray-500 bg-gray-800 px-4 py-2 text-sm text-white outline-none transition-all focus:border-blue-500"
-        placeholder="Tipo"
         required
-      />
+      >
+        <option value="" disabled selected>Selecciona un tipo</option>
+        <option value="casa">Casa</option>
+        <option value="departamento">Departamento</option>
+        <option value="terreno">Terreno</option>
+        <option value="comercial">Comercial</option>
+        <option value="oficina">Oficina</option>
+        <option value="industrial">Industrial</option>
+        <option value="bodega">Bodega</option>
+        <option value="casa_rural">Casa Rural</option>
+        <option value="cabaña_de_madera">Cabaña de Madera</option>
+        <option value="rancho">Rancho</option>
+        <option value="hacienda">Hacienda</option>
+        <option value="villa">Villa</option>
+        <option value="penthouse">Penthouse</option>
+        <option value="loft">Loft</option>
+        <option value="studio">Studio</option>
+        <option value="duplex">Dúplex</option>
+        <option value="triplex">Tríplex</option>
+        <option value="cuadruplex">Cuádruplex</option>
+        <option value="hotel">Hotel</option>
+        <option value="resort">Resort</option>
+        <option value="hostal">Hostal</option>
+        <option value="chalet">Chalet</option>
+        <option value="modular">Casa Modular</option>
+        <option value="prefabricada">Casa Prefabricada</option>
+        <option value="tiny_house">Tiny House</option>
+        <option value="container_home">Casa Contenedor</option>
+        <!-- Agrega más opciones según sea necesario -->
+      </select>
     </div>
+    
 
     <div class="relative w-full min-w-[200px] h-12 my-4">
       <input

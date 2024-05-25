@@ -21,4 +21,4 @@ const PropiedadSchema = new mongoose.Schema({
   fechaDisponibilidad: { type: Date, required: true }
 });
 
-module.exports = mongoose.model('Propiedad', PropiedadSchema);
+module.exports = mongoose.model('Propiedades', PropiedadSchema);

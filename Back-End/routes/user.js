@@ -32,7 +32,6 @@ router.post("/", async (req, res) => {
         );
     }
 
-    // Si todo sale bien, guardamos el usuario en la base de datos y construimos el token JWT
     user = new User({
       name: req.body.name,
       email: req.body.email,
@@ -41,8 +40,8 @@ router.post("/", async (req, res) => {
     });
 
     const result = await user.save();
-    const token = "tokendeejemplo";
-    res.status(200).send({ user });
+    const id = result._id;
+    res.status(200).send({ user, id});
   } else {
     res.status(400).send("Tienes que poner algo");
   }

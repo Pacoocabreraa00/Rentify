@@ -20,4 +20,7 @@ export class PropiedadService {
     return this.http.post<Propiedad>(this.apiUrl, propiedad);
   }
 
+  getPropiedadesNE(userId: string | null): Observable<Propiedad[]> {
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/exclude/${userId}`);
+  }
 }
