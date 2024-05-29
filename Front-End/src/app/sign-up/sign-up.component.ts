@@ -19,7 +19,7 @@ export class SignUpComponent {
     nacionalidad: '',
   };
   err: string = '';
-
+  res: string = '';
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
@@ -31,12 +31,15 @@ export class SignUpComponent {
   signUp() {
     this.auth.signUpUser(this.usuario).subscribe({
       next: (response) => {
-        console.log('Response from sign-up:', response); // Agrega esta línea para depurar
-        if (response.id) {
-          localStorage.setItem('id', response.id);
+        console.log('Response from sign-up:', response); // Para depuración
+  
+        if (response && response['_id']) {
+          this.res = response['_id'];
+          localStorage.setItem('id', response['_id']);
           this.router.navigate(['/']);
         } else {
           console.error('Sign-up response missing ID. Check API response structure.');
+          this.err = 'Sign-up response missing ID. Check API response structure.';
         }
       },
       error: (error) => {
@@ -45,4 +48,6 @@ export class SignUpComponent {
       },
     });
   }
+  
+  
 }

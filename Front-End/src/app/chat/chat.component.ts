@@ -69,7 +69,7 @@ export class ChatComponent implements OnInit {
     try {
       const res = await fetch('https://random-data-api.com/api/users/random_user');
       const { username: nombreUsuarioAleatorio } = await res.json();
-      localStorage.setItem('username', nombreUsuarioAleatorio);
+      // localStorage.setItem('username', nombreUsuarioAleatorio);
       console.log(`Nuevo nombre de usuario establecido: ${nombreUsuarioAleatorio}`);
     } catch (error) {
       console.error('Error al obtener el nombre de usuario:', error);

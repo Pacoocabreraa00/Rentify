@@ -1,57 +1,84 @@
-<div class="fixed inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
-  <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-2xl text-white">
-    <div class="text-end">
-      <button (click)="closeModal()">
-        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="25" height="25" viewBox="0,0,256,256">
-          <g fill="#737373" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt"
-              stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
-              font-family="none" font-weight="none" font-size="none" text-anchor="none"
-              style="mix-blend-mode: normal">
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-5xl text-white">
+    <div class="text-right">
+      <button (click)="closeModal()" class="focus:outline-none">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="25"
+          height="25"
+          viewBox="0 0 256 256"
+          class="text-gray-400 hover:text-gray-200"
+        >
+          <g
+            fill="currentColor"
+            fill-rule="nonzero"
+            stroke="none"
+            stroke-width="1"
+            stroke-linecap="butt"
+            stroke-linejoin="miter"
+            stroke-miterlimit="10"
+            stroke-dasharray=""
+            stroke-dashoffset="0"
+            font-family="none"
+            font-weight="none"
+            font-size="none"
+            text-anchor="none"
+            style="mix-blend-mode: normal"
+          >
             <g transform="scale(8.53333,8.53333)">
               <path
-                d="M7,4c-0.25587,0 -0.51203,0.09747 -0.70703,0.29297l-2,2c-0.391,0.391 -0.391,1.02406 0,1.41406l7.29297,7.29297l-7.29297,7.29297c-0.391,0.391 -0.391,1.02406 0,1.41406l2,2c0.391,0.391 1.02406,0.391 1.41406,0l7.29297,-7.29297l7.29297,7.29297c0.39,0.391 1.02406,0.391 1.41406,0l2,-2c0.391,-0.391 0.391,-1.02406 0,-1.41406l-7.29297,-7.29297l7.29297,-7.29297c0.391,-0.39 0.391,-1.02406 0,-1.41406l-2,-2c-0.391,-0.391 -1.02406,-0.391 -1.41406,0l-7.29297,7.29297l-7.29297,-7.29297c-0.1955,-0.1955 -0.45116,-0.29297 -0.70703,-0.29297z"></path>
+                d="M7,4c-0.25587,0 -0.51203,0.09747 -0.70703,0.29297l-2,2c-0.391,0.391 -0.391,1.02406 0,1.41406l7.29297,7.29297l-7.29297,7.29297c-0.391,0.391 -0.391,1.02406 0,1.41406l2,2c0.391,0.391 1.02406,0.391 1.41406,0l7.29297,-7.29297l7.29297,7.29297c0.39,0.391 1.02406,0.391 1.41406,0l2,-2c0.391,-0.391 0.391,-1.02406 0,-1.41406l-7.29297,-7.29297l7.29297,-7.29297c0.391,-0.39 0.391,-1.02406 0,-1.41406l-2,-2c-0.391,-0.391 -1.02406,-0.391 -1.41406,0l-7.29297,7.29297l-7.29297,-7.29297c-0.1955,-0.1955 -0.45116,-0.29297 -0.70703,-0.29297z"
+              ></path>
             </g>
           </g>
         </svg>
       </button>
     </div>
-
-    <!-- Carousel -->
-    <div id="simple-carousel" class="relative w-full">
-      <!-- Carousel inner -->
-      <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-        <div *ngFor="let imagen of propiedad.imagenes; let i = index" 
-             [class.hidden]="i !== currentImageIndex" 
-             class="duration-700 ease-in-out" 
-             data-carousel-item>
-          <img [src]="getImageUrl(imagen)" 
-               class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" 
-               alt="Property Image" 
-               (error)="onImageError($event)"/>
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 md:pr-4">
+        <!-- Carousel -->
+        <div id="simple-carousel" class="relative w-full">
+          <!-- Carousel inner -->
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <div
+              *ngFor="let imagen of propiedad.imagenes; let i = index"
+              [class.hidden]="i !== currentImageIndex"
+              class="duration-700 ease-in-out"
+              data-carousel-item
+            >
+              <img
+                [src]="getImageUrl(imagen)"
+                class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-xl"
+                alt="Property Image"
+                (error)="onImageError($event)"
+              />
+            </div>
+          </div>
+        </div>
+        <br />
+        <div>
+          <google-map [options]="options" width="470px" height="300px" ></google-map>
         </div>
       </div>
+      <div class="md:w-1/2 md:pl-4 mt-4 md:mt-0">
+        <!-- Property details -->
+        <h2 class="text-2xl font-bold mb-4">{{ propiedad.nombre }}</h2>
+        <p><strong>Tipo:</strong> {{ propiedad.tipo }}</p>
+        <p><strong>Dirección:</strong> {{ propiedad.direccion }}</p>
+        <p><strong>Ciudad:</strong> {{ propiedad.ciudad }}</p>
+        <p><strong>Código Postal:</strong> {{ propiedad.codigoPostal }}</p>
+        <p><strong>País:</strong> {{ propiedad.pais }}</p>
+        <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
+        <p><strong>Habitaciones:</strong> {{ propiedad.habitaciones }}</p>
+        <p><strong>Baños:</strong> {{ propiedad.banos }}</p>
+        <p><strong>Superficie:</strong> {{ propiedad.superficie }} m²</p>
+        <p><strong>Plantas:</strong> {{ propiedad.plantas }}</p>
+        <p><strong>Garaje:</strong> {{ propiedad.garaje ? "Sí" : "No" }}</p>
+        <p><strong>Piscina:</strong> {{ propiedad.piscina ? "Sí" : "No" }}</p>
+        <p><strong>Precio Venta:</strong> {{ propiedad.precioVenta | currency }}</p>
+        <p><strong>Estado:</strong> {{ propiedad.estado }}</p>
+        <p><strong>Fecha Disponibilidad:</strong> {{ propiedad.fechaDisponibilidad | date }}</p>
+      </div>
     </div>
-    
-
-    <!-- Property details -->
-    <h2 class="text-2xl font-bold mb-4">{{ propiedad.nombre }}</h2>
-    <p><strong>Tipo:</strong> {{ propiedad.tipo }}</p>
-    <p><strong>Dirección:</strong> {{ propiedad.direccion }}</p>
-    <p><strong>Ciudad:</strong> {{ propiedad.ciudad }}</p>
-    <p><strong>Código Postal:</strong> {{ propiedad.codigoPostal }}</p>
-    <p><strong>País:</strong> {{ propiedad.pais }}</p>
-    <p><strong>Descripción:</strong> {{ propiedad.descripcion }}</p>
-    <p><strong>Habitaciones:</strong> {{ propiedad.habitaciones }}</p>
-    <p><strong>Baños:</strong> {{ propiedad.banos }}</p>
-    <p><strong>Superficie:</strong> {{ propiedad.superficie }} m²</p>
-    <p><strong>Plantas:</strong> {{ propiedad.plantas }}</p>
-    <p><strong>Garaje:</strong> {{ propiedad.garaje ? "Sí" : "No" }}</p>
-    <p><strong>Piscina:</strong> {{ propiedad.piscina ? "Sí" : "No" }}</p>
-    <p><strong>Precio Venta:</strong> {{ propiedad.precioVenta | currency }}</p>
-    <p><strong>Estado:</strong> {{ propiedad.estado }}</p>
-    <p>
-      <strong>Fecha Disponibilidad:</strong>
-      {{ propiedad.fechaDisponibilidad | date }}
-    </p>
   </div>
 </div>

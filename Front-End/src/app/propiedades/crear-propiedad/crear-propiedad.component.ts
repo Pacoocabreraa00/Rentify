@@ -1,10 +1,18 @@
 import { Component } from '@angular/core';
 import { PropiedadService } from '../../services/propiedad.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Propiedad } from '../../models/propiedad.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AutocompleteService } from '../../services/autocomplete.service';
+import { Observable, of } from 'rxjs';
+import { startWith, switchMap, catchError, map } from 'rxjs/operators';
+
+interface Term {
+  offset: number;
+  value: string;
+}
 
 @Component({
   selector: 'app-crear-propiedad',
@@ -15,29 +23,75 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class CrearPropiedadComponent {
   propiedad = new Propiedad(
-    '', // id
-    '', // nombre
-    '', // tipo
-    '', // direccion
-    '', // ciudad
-    '', // codigoPostal
-    '', // pais
-    '', // descripcion
-    null, // habitaciones
-    null, // banos
-    null, // superficie
-    null, // plantas
-    null, // garaje
-    null, // piscina
-    null, // precioVenta
-    localStorage.getItem('id') || '', // propietario
-    [], // imagenes
-    '', // estado
-    new Date() // fechaDisponibilidad
+    '', '', '', '', '', '', '', '', null, null, null, null, null, null, null, localStorage.getItem('id') || '', [], '', new Date()
   );
   selectedFiles: File[] = [];
+  searchControl = new FormControl();
+  filteredOptions: Observable<any[]> = of([]);  // Inicializar con un observable de array vacío
 
-  constructor(private service: PropiedadService, private router: Router) {}
+  constructor(
+    private propiedadService: PropiedadService,
+    private router: Router,
+    private autocompleteService: AutocompleteService
+  ) {
+    this.filteredOptions = this.searchControl.valueChanges.pipe(
+      startWith(''),
+      switchMap(value => {
+        if (value && value.length > 0) {
+          return this.autocompleteService.getAutocomplete(value).pipe(
+            map(response => response.predictions || []),
+            catchError(() => of([]))
+          );
+        } else {
+          return of([]); // Devolver un array vacío si el input está vacío
+        }
+      })
+    );
+
+    this.filteredOptions.subscribe(data => {
+      console.log('Autocomplete options:', data);
+    });
+  }
+
+  onKey(event: any) {
+    const inputValue = event.target.value;
+    if (inputValue && inputValue.length > 0) {
+      this.filteredOptions = this.autocompleteService.getAutocomplete(inputValue).pipe(
+        map(response => response.predictions || []),
+        catchError(() => of([]))
+      );
+    } else {
+      this.filteredOptions = of([]);
+    }
+  }
+
+  selectOption(option: any) {
+    this.propiedad.direccion = option.description;
+
+    // Autocompletar otros campos necesarios
+    const terms: Term[] = option.terms;
+    this.propiedad.ciudad = terms.find((term: Term) => term.offset === 28)?.value || '';
+    this.propiedad.codigoPostal = terms.find((term: Term) => term.offset === 22)?.value || '';
+    this.propiedad.pais = terms.find((term: Term) => term.offset === 54)?.value || '';
+
+    // Vaciar el control de búsqueda para eliminar la lista de autocompletado
+    this.searchControl.setValue('');
+
+    // Marcar los campos como llenos
+    this.markFieldsAsFilled();
+  }
+
+  markFieldsAsFilled() {
+    const direccionField = document.getElementById('direccionField');
+    const ciudadField = document.getElementById('ciudadField');
+    const codigoPostalField = document.getElementById('codigoPostalField');
+    const paisField = document.getElementById('paisField');
+
+    if (direccionField) direccionField.classList.add('filled');
+    if (ciudadField) ciudadField.classList.add('filled');
+    if (codigoPostalField) codigoPostalField.classList.add('filled');
+    if (paisField) paisField.classList.add('filled');
+  }
 
   onDragOver(event: DragEvent) {
     event.preventDefault();
@@ -115,7 +169,7 @@ export class CrearPropiedadComponent {
       formData.append('propertyImages', file, file.name);
     }
 
-    this.service.postPropiedad(formData).subscribe({
+    this.propiedadService.postPropiedad(formData).subscribe({
       next: (res: any) => {
         this.router.navigate(['/propiedades']);
       },

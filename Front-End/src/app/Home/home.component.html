@@ -1,24 +1,9 @@
 <main
   class="min-h-screen flex flex-col items-center justify-center bg-gray-800 text-white px-4 pt-10"
 >
-  <section class="text-center">
-    <h2 class="text-4xl font-extrabold">
-      Gestiona tus propiedades con facilidad
-    </h2>
-    <p class="mt-4 text-lg">
-      Olvídate de las complicaciones y toma el control de tus inmuebles con
-      nuestro software gratuito de gestión de propiedades.
-    </p>
-    <button
-      class="mt-8 bg-violet-600 text-white font-medium py-2 px-4 rounded-md hover:bg-violet-700"
-      routerLink="/propiedades"
-    >
-      Ver mis propiedades
-    </button>
-  </section>
   <section>
-    <div class="pt-20 container mx-auto">
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="pt-10 container mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <app-propiedad-card
           *ngFor="let propiedad of propiedades"
           [propiedad]="propiedad"
@@ -26,7 +11,12 @@
           class="m-4"
         ></app-propiedad-card>
       </div>
-      <app-propiedad-modal *ngIf="selectedPropiedad" [propiedad]="selectedPropiedad" (close)="closeModal()"></app-propiedad-modal>
+      <app-propiedad-modal
+        *ngIf="selectedPropiedad"
+        [propiedad]="selectedPropiedad"
+        (close)="closeModal()"
+      ></app-propiedad-modal>
     </div>
   </section>
 </main>
+ 

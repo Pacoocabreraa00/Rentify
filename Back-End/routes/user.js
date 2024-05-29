@@ -40,8 +40,7 @@ router.post("/", async (req, res) => {
     });
 
     const result = await user.save();
-    const id = result._id;
-    res.status(200).send({ user, id});
+    res.status(200).send({ name: user.name, email: user.email, nacionalidad: user.nacionalidad, _id: user._id });
   } else {
     res.status(400).send("Tienes que poner algo");
   }
