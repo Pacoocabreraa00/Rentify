@@ -11,7 +11,8 @@ export class AutocompleteService {
   constructor(private http: HttpClient) {}
 
   getAutocomplete(input: string): Observable<any> {
-    console.log(`Fetching autocomplete for input: ${input}`);
+    // console.log(`Fetching autocomplete for input: ${input}`);
+    console.log(`${this.apiUrl}${input}`)
     return this.http.get<any>(`${this.apiUrl}${input}`);
   }
 }

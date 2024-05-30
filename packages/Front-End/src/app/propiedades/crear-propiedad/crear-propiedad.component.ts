@@ -27,7 +27,7 @@ export class CrearPropiedadComponent {
   );
   selectedFiles: File[] = [];
   searchControl = new FormControl();
-  filteredOptions: Observable<any[]> = of([]);  // Inicializar con un observable de array vacío
+  filteredOptions: Observable<any[]> = of([]); 
 
   constructor(
     private propiedadService: PropiedadService,
@@ -43,7 +43,7 @@ export class CrearPropiedadComponent {
             catchError(() => of([]))
           );
         } else {
-          return of([]); // Devolver un array vacío si el input está vacío
+          return of([]);
         }
       })
     );
@@ -67,17 +67,12 @@ export class CrearPropiedadComponent {
 
   selectOption(option: any) {
     this.propiedad.direccion = option.description;
-
-    // Autocompletar otros campos necesarios
     const terms: Term[] = option.terms;
     this.propiedad.ciudad = terms.find((term: Term) => term.offset === 28)?.value || '';
     this.propiedad.codigoPostal = terms.find((term: Term) => term.offset === 22)?.value || '';
     this.propiedad.pais = terms.find((term: Term) => term.offset === 54)?.value || '';
-
-    // Vaciar el control de búsqueda para eliminar la lista de autocompletado
     this.searchControl.setValue('');
-
-    // Marcar los campos como llenos
+    this.filteredOptions = of([]);
     this.markFieldsAsFilled();
   }
 
