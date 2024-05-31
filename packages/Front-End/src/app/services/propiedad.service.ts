@@ -23,4 +23,26 @@ export class PropiedadService {
   getPropiedadesNE(userId: string | null): Observable<Propiedad[]> {
     return this.http.get<Propiedad[]>(`${this.apiUrl}/exclude/${userId}`);
   }
+
+  updatePropiedad(propiedad: Propiedad): Observable<Propiedad> {
+    const formData = new FormData();
+    (Object.keys(propiedad) as (keyof Propiedad)[]).forEach(key => {
+      if (Array.isArray(propiedad[key])) {
+        (propiedad[key] as string[]).forEach((item: string) => {
+          formData.append(key, item);
+        });
+      } else {
+        formData.append(key, propiedad[key] as any);
+      }
+    });
+  
+    return this.http.put<Propiedad>(`${this.apiUrl}/${propiedad._id}`, formData);
+  }
+  
+  
+
+  deletePropiedad(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+  
 }

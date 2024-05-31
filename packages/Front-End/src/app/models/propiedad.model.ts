@@ -1,6 +1,6 @@
 // src/app/models/propiedad.model.ts
 export class Propiedad {
-  id: string;
+  _id: string;
   nombre: string;
   tipo: string;
   direccion: string;
@@ -21,7 +21,7 @@ export class Propiedad {
   fechaDisponibilidad: Date;
 
   constructor(
-    id: string,
+    _id: string,
     nombre: string,
     tipo: string,
     direccion: string,
@@ -41,7 +41,7 @@ export class Propiedad {
     estado: string,
     fechaDisponibilidad: Date
   ) {
-    this.id = id;
+    this._id = _id;
     this.nombre = nombre;
     this.tipo = tipo;
     this.direccion = direccion;
