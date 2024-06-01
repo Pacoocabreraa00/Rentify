@@ -7,7 +7,7 @@ import { PropiedadService } from '../../services/propiedad.service';
 @Component({
   selector: 'app-propiedad-modal-user',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Import FormsModule here
+  imports: [CommonModule, FormsModule],
   templateUrl: './propiedad-modal-user.component.html',
   styleUrls: ['./propiedad-modal-user.component.css']
 })
@@ -18,6 +18,8 @@ export class PropiedadModalComponentUser implements OnInit, OnDestroy {
   currentImageIndex = 0;
   intervalId: any;
   editMode: { [key: string]: boolean } = {};
+  showDeleteModal = false; // Control variable for the delete modal
+
   constructor(private propiedadService: PropiedadService) {}
 
   ngOnInit() {
@@ -37,7 +39,7 @@ export class PropiedadModalComponentUser implements OnInit, OnDestroy {
     console.log(`Generating URL for image: ${imagePath}`);
     return `${baseUrl}${imagePath}`;
   }
-  
+
   onImageError(event: Event) {
     console.error('Error loading image:', (event.target as HTMLImageElement).src);
   }
@@ -57,33 +59,41 @@ export class PropiedadModalComponentUser implements OnInit, OnDestroy {
     this.propiedadService.updatePropiedad(this.propiedad).subscribe(
       response => {
         console.log('Propiedad actualizada exitosamente', response);
+        this.propiedad = response; // Actualizar la propiedad local con la respuesta del servidor
         this.closeModal();
-        // Manejar éxito (por ejemplo, mostrar una notificación, cerrar el modal)
       },
       error => {
         console.error('Error al actualizar propiedad', error);
-        // Manejar error (por ejemplo, mostrar un mensaje de error)
       }
     );
   }
-  deletePropiedad() {
-    if (confirm('Are you sure you want to delete this property?')) {
-      const propiedadId = this.propiedad._id;
-      if (!propiedadId) {
-        console.error('Property ID is undefined');
-        return;
-      }
-      this.propiedadService.deletePropiedad(propiedadId).subscribe(
-        response => {
-          console.log('Property deleted successfully', response);
-          this.closeModal();
-        },
-        error => {
-          console.error('Error deleting property', error);
-        }
-      );
-    }
+
+  openDeleteModal() {
+    this.showDeleteModal = true;
   }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+  }
+
+  confirmDelete() {
+    const propiedadId = this.propiedad._id;
+    if (!propiedadId) {
+      console.error('Property ID is undefined');
+      return;
+    }
+    this.propiedadService.deletePropiedad(propiedadId).subscribe(
+      response => {
+        console.log('Property deleted successfully', response);
+        this.closeModal();
+      },
+      error => {
+        console.error('Error deleting property', error);
+      }
+    );
+    this.closeDeleteModal();
+  }
+
   toggleEditMode(field: string) {
     this.editMode[field] = !this.editMode[field];
   }
