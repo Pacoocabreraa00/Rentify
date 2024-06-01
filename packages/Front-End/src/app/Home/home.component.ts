@@ -20,14 +20,7 @@ interface FilterCriteria {
 })
 export class HomeComponent implements OnInit {
   propiedades: Propiedad[] = [];
-  // filteredPropiedades: Propiedad[] = [];
   selectedPropiedad: Propiedad | null = null;
-  
-  // filterCriteria: FilterCriteria = {
-  //   location: '',
-  //   maxPrice: 0,
-  //   type: ''
-  // };
 
   constructor(private service: PropiedadService) {}
 
@@ -50,14 +43,4 @@ export class HomeComponent implements OnInit {
   closeModal() {
     this.selectedPropiedad = null;
   }
-
-  // applyFilter() {
-  //   this.filteredPropiedades = this.propiedades.filter(propiedad => {
-  //     const matchesLocation = this.filterCriteria.location ? propiedad.location.includes(this.filterCriteria.location) : true;
-  //     const matchesPrice = this.filterCriteria.maxPrice ? propiedad.price <= this.filterCriteria.maxPrice : true;
-  //     const matchesType = this.filterCriteria.type ? propiedad.type === this.filterCriteria.type : true;
-
-  //     return matchesLocation && matchesPrice && matchesType;
-  //   });
-  // }
 }

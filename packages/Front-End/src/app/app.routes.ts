@@ -4,7 +4,6 @@ import { LoginComponent } from './Login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AuthGuard } from './guard/guard.guard';
 import { NotFoundComponent } from './common/not-found/not-found.component';
-import { ChatComponent } from './chat/chat.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { CrearPropiedadComponent } from './propiedades/crear-propiedad/crear-propiedad.component';
 
@@ -21,11 +20,6 @@ export const routes: Routes = [
   {
     path: 'registro',
     component: SignUpComponent,
-  },
-  {
-    path: 'chat',
-    component: ChatComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'propiedades/crear-propiedad',
