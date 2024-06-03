@@ -312,14 +312,6 @@ cd Rentify
     npm start
     ```
 
-## Uso
-
-1. **Registro y Autenticación:** Los usuarios pueden registrarse y autenticarse para acceder a las funcionalidades de la plataforma.
-2. **Publicación de Propiedades:** Los usuarios autenticados pueden publicar y gestionar sus listados de propiedades.
-3. **Búsqueda de Propiedades:** Los usuarios pueden buscar propiedades utilizando diversos filtros y realizar recorridos virtuales.
-4. **Calificaciones y Reseñas:** Los usuarios pueden dejar calificaciones y reseñas sobre propiedades y servicios.
-5. **Notificaciones:** Los usuarios recibirán notificaciones sobre actividades relevantes.
-
 ## Contribuir
 
 1. Haz un fork del proyecto.
