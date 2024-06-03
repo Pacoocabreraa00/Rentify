@@ -9,8 +9,8 @@
     "packages/*"
   ],
   "scripts": {
-    "start:all": "concurrently \"lerna run start --scope back-end\" \"lerna run start --scope front-end\"",
-    "start:back-end": "lerna run start --scope back-end",
-    "start:front-end": "lerna run start --scope front-end"
+    "start": "concurrently \"lerna run start --scope back-end\" \"lerna run start --scope front-end\"",
+    "front": "lerna run start --scope back-end",
+    "back": "lerna run start --scope front-end"
   }
 }
