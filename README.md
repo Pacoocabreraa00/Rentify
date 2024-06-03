@@ -21,12 +21,10 @@ Rentify es una plataforma digital diseñada como un marketplace de propiedades, 
 - Node.js
 - Express.js
 - MongoDB
-- JWT (JSON Web Tokens) para autenticación
 
 ### Frontend
-- React.js
-- Redux
-- CSS / SASS
+- Angular.js 17
+- CSS / Tailwind
 
 ## Estructura del Proyecto
 
