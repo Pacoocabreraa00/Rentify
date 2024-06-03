@@ -36,9 +36,7 @@
     </div>
     <div class="flex flex-col md:flex-row items-center">
       <div class="md:w-1/2 md:pr-4">
-        <!-- Carousel -->
         <div id="simple-carousel" class="relative w-full">
-          <!-- Carousel inner -->
           <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
             <div
               *ngFor="let imagen of propiedad.imagenes; let i = index"
@@ -58,7 +56,6 @@
         <br />
       </div>
       <div class="md:w-1/2 md:pl-4 mt-4 md:mt-0">
-        <!-- Property details -->
         <h2 class="text-2xl font-bold mb-4">{{ propiedad.nombre }}</h2>
         <p><strong>Tipo:</strong> {{ propiedad.tipo }}</p>
         <p><strong>Dirección:</strong> {{ propiedad.direccion }}</p>

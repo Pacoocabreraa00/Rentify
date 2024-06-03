@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit {
     this.service.getPropiedadesNE(localStorage.getItem('id')).subscribe({
       next: (res: Propiedad[]) => {
         this.propiedades = res;
-        // this.filteredPropiedades = res;
       },
       error: (err: any) => {
         console.error(err);

@@ -6,8 +6,7 @@ import { Injectable } from '@angular/core';
 export class AuthGuard implements CanActivate {
 
   constructor(private authService: AuthService, private router: Router){}
-  //Definimos el método canActivate,que devuelve true si el usuario esta loggeado, y false si 
-  //no lo está
+  
   canActivate(): boolean {
     if (this.authService.isLogged()) {
       return true

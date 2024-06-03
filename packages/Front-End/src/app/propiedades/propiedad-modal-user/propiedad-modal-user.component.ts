@@ -18,7 +18,7 @@ export class PropiedadModalComponentUser implements OnInit, OnDestroy {
   currentImageIndex = 0;
   intervalId: any;
   editMode: { [key: string]: boolean } = {};
-  showDeleteModal = false; // Control variable for the delete modal
+  showDeleteModal = false; 
 
   constructor(private propiedadService: PropiedadService) {}
 
@@ -59,7 +59,7 @@ export class PropiedadModalComponentUser implements OnInit, OnDestroy {
     this.propiedadService.updatePropiedad(this.propiedad).subscribe(
       response => {
         console.log('Propiedad actualizada exitosamente', response);
-        this.propiedad = response; // Actualizar la propiedad local con la respuesta del servidor
+        this.propiedad = response; 
         this.closeModal();
       },
       error => {

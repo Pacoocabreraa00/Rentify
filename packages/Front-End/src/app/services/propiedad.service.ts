@@ -46,7 +46,6 @@ export class PropiedadService {
       }
     });
 
-    // Log the FormData keys and values for debugging
     formData.forEach((value, key) => {
       console.log(key, value);
     });

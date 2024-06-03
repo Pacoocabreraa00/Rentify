@@ -1,5 +1,5 @@
 // src/environments/environment.ts
 export const environment = {
   production: false,
-  googleApiKey: 'AIzaSyCQhMFsKBb31EmSY6drXtLgfb08WYT7Ed8', // Reemplaza con tu clave API
+  googleApiKey: 'AIzaSyCQhMFsKBb31EmSY6drXtLgfb08WYT7Ed8',
 };
