@@ -253,3 +253,77 @@ Rentify es una plataforma digital diseñada como un marketplace de propiedades, 
             └── tsconfig.json
             └── tsconfig.spec.json
     └── README.md
+```
+## Instalación y Configuración
+### Requisitos Previos
+- Node.js(v12 o superior)
+- MongoDB
+- Git
+### Clonar el repositorio
+```bash
+git clone https://github.com/Pacoocabreraa00/Rentify.git
+cd Rentify
+```
+### Configuración del Backend
+
+1. Navega al directorio `packages/Back-End`.
+
+    ```bash
+    cd packages/Back-End
+    ```
+
+2. Instala las dependencias.
+
+    ```bash
+    npm install
+    ```
+
+3. Configura las variables de entorno. Crea un archivo `.env` y añade las siguientes variables:
+
+    ```env
+    PORT=5000
+    MONGO_URI=<your_mongodb_uri>
+    JWT_SECRET=<your_jwt_secret>
+    ```
+
+4. Inicia el servidor backend.
+
+    ```bash
+    npm start
+    ```
+
+### Configuración del Frontend
+
+1. Navega al directorio `packages/Front-End`.
+
+    ```bash
+    cd packages/Front-End
+    ```
+
+2. Instala las dependencias.
+
+    ```bash
+    npm install
+    ```
+
+3. Inicia la aplicación frontend.
+
+    ```bash
+    npm start
+    ```
+
+## Uso
+
+1. **Registro y Autenticación:** Los usuarios pueden registrarse y autenticarse para acceder a las funcionalidades de la plataforma.
+2. **Publicación de Propiedades:** Los usuarios autenticados pueden publicar y gestionar sus listados de propiedades.
+3. **Búsqueda de Propiedades:** Los usuarios pueden buscar propiedades utilizando diversos filtros y realizar recorridos virtuales.
+4. **Calificaciones y Reseñas:** Los usuarios pueden dejar calificaciones y reseñas sobre propiedades y servicios.
+5. **Notificaciones:** Los usuarios recibirán notificaciones sobre actividades relevantes.
+
+## Contribuir
+
+1. Haz un fork del proyecto.
+2. Crea una rama para tu nueva funcionalidad (`git checkout -b feature/nueva-funcionalidad`).
+3. Realiza tus cambios y commitea (`git commit -m 'Añadir nueva funcionalidad'`).
+4. Haz push a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
