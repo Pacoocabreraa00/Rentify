@@ -1,0 +1,302 @@
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-5xl text-white">
+    <div class="text-right">
+      <button (click)="updatePropiedad()" class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">
+        Guardar
+      </button>
+      <button (click)="openDeleteModal()" class="focus:outline-none mr-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" class="text-gray-400 hover:text-red-600">
+          <path fill="currentColor" d="M 10.806641 2 C 10.289641 2 9.7956875 2.2043125 9.4296875 2.5703125 L 9 3 L 4 3 A 1.0001 1.0001 0 1 0 4 5 L 20 5 A 1.0001 1.0001 0 1 0 20 3 L 15 3 L 14.570312 2.5703125 C 14.205312 2.2043125 13.710359 2 13.193359 2 L 10.806641 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"></path>
+        </svg>
+      </button>
+      <button (click)="closeModal()" class="focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 256 256" class="text-gray-400 hover:text-gray-200">
+          <g fill="currentColor" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <g transform="scale(8.53333,8.53333)">
+              <path d="M7,4c-0.25587,0 -0.51203,0.09747 -0.70703,0.29297l-2,2c-0.391,0.391 -0.391,1.02406 0,1.41406l7.29297,7.29297l-7.29297,7.29297c-0.391,0.391 -0.391,1.02406 0,1.41406l2,2c0.391,0.391 1.02406,0.391 1.41406,0l7.29297,-7.29297l7.29297,7.29297c0.39,0.391 1.02406,0.391 1.41406,0l2,-2c0.391,-0.391 0.391,-1.02406 0,-1.41406l-7.29297,-7.29297l7.29297,-7.29297c0.391,-0.39 0.391,-1.02406 0,-1.41406l-2,-2c-0.391,-0.391 -1.02406,-0.391 -1.41406,0l-7.29297,7.29297l-7.29297,-7.29297c-0.1955,-0.1955 -0.45116,-0.29297 -0.70703,-0.29297z"></path>
+            </g>
+          </g>
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="md:w-1/2 md:pr-4">
+        <!-- Carousel -->
+        <div id="simple-carousel" class="relative w-full">
+          <!-- Carousel inner -->
+          <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+            <div *ngFor="let imagen of propiedad.imagenes; let i = index" [class.hidden]="i !== currentImageIndex" class="duration-700 ease-in-out" data-carousel-item>
+              <img [src]="getImageUrl(imagen)" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-xl" alt="Property Image" (error)="onImageError($event)" />
+            </div>
+          </div>
+        </div>
+        <br />
+      </div>
+      <div class="md:w-1/2 md:pl-4 mt-4 md:mt-0">
+        <!-- Property details -->
+        <h2 class="text-2xl font-bold mb-4 flex items-center">
+          <ng-container *ngIf="!editMode['nombre']; else editNombre">
+            <p>{{ propiedad.nombre }}</p>
+            <button (click)="toggleEditMode('nombre')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editNombre>
+            <input [(ngModel)]="propiedad.nombre" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('nombre')" />
+          </ng-template>
+        </h2>
+
+        <p>
+          <strong>Tipo:</strong>
+          <ng-container *ngIf="!editMode['tipo']; else editTipo">
+            <span>{{ propiedad.tipo }}</span>
+            <button (click)="toggleEditMode('tipo')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editTipo>
+            <input [(ngModel)]="propiedad.tipo" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('tipo')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Dirección:</strong>
+          <ng-container *ngIf="!editMode['direccion']; else editDireccion">
+            <span>{{ propiedad.direccion }}</span>
+            <button (click)="toggleEditMode('direccion')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editDireccion>
+            <input [(ngModel)]="propiedad.direccion" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('direccion')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Ciudad:</strong>
+          <ng-container *ngIf="!editMode['ciudad']; else editCiudad">
+            <span>{{ propiedad.ciudad }}</span>
+            <button (click)="toggleEditMode('ciudad')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editCiudad>
+            <input [(ngModel)]="propiedad.ciudad" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('ciudad')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Código Postal:</strong>
+          <ng-container *ngIf="!editMode['codigoPostal']; else editCodigoPostal">
+            <span>{{ propiedad.codigoPostal }}</span>
+            <button (click)="toggleEditMode('codigoPostal')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editCodigoPostal>
+            <input [(ngModel)]="propiedad.codigoPostal" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('codigoPostal')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>País:</strong>
+          <ng-container *ngIf="!editMode['pais']; else editPais">
+            <span>{{ propiedad.pais }}</span>
+            <button (click)="toggleEditMode('pais')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editPais>
+            <input [(ngModel)]="propiedad.pais" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('pais')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Descripción:</strong>
+          <ng-container *ngIf="!editMode['descripcion']; else editDescripcion">
+            <span>{{ propiedad.descripcion }}</span>
+            <button (click)="toggleEditMode('descripcion')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editDescripcion>
+            <textarea [(ngModel)]="propiedad.descripcion" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('descripcion')"></textarea>
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Habitaciones:</strong>
+          <ng-container *ngIf="!editMode['habitaciones']; else editHabitaciones">
+            <span>{{ propiedad.habitaciones }}</span>
+            <button (click)="toggleEditMode('habitaciones')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editHabitaciones>
+            <input type="number" [(ngModel)]="propiedad.habitaciones" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('habitaciones')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Baños:</strong>
+          <ng-container *ngIf="!editMode['banos']; else editBanos">
+            <span>{{ propiedad.banos }}</span>
+            <button (click)="toggleEditMode('banos')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editBanos>
+            <input type="number" [(ngModel)]="propiedad.banos" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('banos')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Superficie:</strong>
+          <ng-container *ngIf="!editMode['superficie']; else editSuperficie">
+            <span>{{ propiedad.superficie }} m²</span>
+            <button (click)="toggleEditMode('superficie')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editSuperficie>
+            <input type="number" [(ngModel)]="propiedad.superficie" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('superficie')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Plantas:</strong>
+          <ng-container *ngIf="!editMode['plantas']; else editPlantas">
+            <span>{{ propiedad.plantas }}</span>
+            <button (click)="toggleEditMode('plantas')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editPlantas>
+            <input type="number" [(ngModel)]="propiedad.plantas" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('plantas')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Garaje:</strong>
+          <ng-container *ngIf="!editMode['garaje']; else editGaraje">
+            <span>{{ propiedad.garaje ? 'Sí' : 'No' }}</span>
+            <button (click)="toggleEditMode('garaje')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editGaraje>
+            <input type="checkbox" [(ngModel)]="propiedad.garaje" class="bg-gray-700 text-white p-2 rounded" (blur)="toggleEditMode('garaje')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Piscina:</strong>
+          <ng-container *ngIf="!editMode['piscina']; else editPiscina">
+            <span>{{ propiedad.piscina ? 'Sí' : 'No' }}</span>
+            <button (click)="toggleEditMode('piscina')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editPiscina>
+            <input type="checkbox" [(ngModel)]="propiedad.piscina" class="bg-gray-700 text-white p-2 rounded" (blur)="toggleEditMode('piscina')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Precio Venta:</strong>
+          <ng-container *ngIf="!editMode['precioVenta']; else editPrecioVenta">
+            <span>{{ propiedad.precioVenta | currency }}</span>
+            <button (click)="toggleEditMode('precioVenta')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editPrecioVenta>
+            <input type="number" [(ngModel)]="propiedad.precioVenta" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('precioVenta')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Estado:</strong>
+          <ng-container *ngIf="!editMode['estado']; else editEstado">
+            <span>{{ propiedad.estado }}</span>
+            <button (click)="toggleEditMode('estado')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editEstado>
+            <input [(ngModel)]="propiedad.estado" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('estado')" />
+          </ng-template>
+        </p>
+
+        <p>
+          <strong>Fecha Disponibilidad:</strong>
+          <ng-container *ngIf="!editMode['fechaDisponibilidad']; else editFechaDisponibilidad">
+            <span>{{ propiedad.fechaDisponibilidad | date }}</span>
+            <button (click)="toggleEditMode('fechaDisponibilidad')" class="ml-2 focus:outline-none">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M15.502 1.94a.5.5 0 0 1 0 .706l-1.22 1.22-2.621-2.621 1.22-1.22a.5.5 0 0 1 .706 0l1.915 1.915zM1 13.5V16h2.5l7.566-7.566-2.621-2.621L1 13.5z"/>
+              </svg>
+            </button>
+          </ng-container>
+          <ng-template #editFechaDisponibilidad>
+            <input type="date" [(ngModel)]="propiedad.fechaDisponibilidad" class="bg-gray-700 text-white p-2 rounded w-full" (blur)="toggleEditMode('fechaDisponibilidad')" />
+          </ng-template>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="deleteModal" [class.hidden]="!showDeleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+  <div class="bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div class="text-right">
+      <button (click)="closeDeleteModal()" class="focus:outline-none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14" class="text-gray-400 hover:text-gray-700">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="text-center">
+      <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+      </svg>
+      <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this property?</h3>
+      <button (click)="confirmDelete()" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+        Yes, I'm sure
+      </button>
+      <button (click)="closeDeleteModal()" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+        No, cancel
+      </button>
+    </div>
+  </div>
+</div>
