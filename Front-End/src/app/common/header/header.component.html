@@ -1,0 +1,60 @@
+<header
+  class="navbar bg-black text-white md:flex md:items-center md:justify-between px-5 py-5"
+>
+  <a routerLink="/" class="navbar-brand flex items-center">
+    <img src="../../../assets/logo.png" alt="" class="w-12 h-12 mr-2" />
+    <img src="../../../assets/Nombre.png" alt="" class="w-32 h-12" />
+  </a>
+  <button
+    class="navbar-toggler md:hidden"
+    type="button"
+    data-toggle="collapse"
+    data-target="#menu"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="navbar-collapse md:flex md:items-center md:ml-auto" id="menu">
+    <ul class="navbar-nav flex">
+      <li class="nav-item mx-5">
+        <a
+          routerLink="/"
+          class="relative inline cursor-pointer text-l font-medium before:bg-violet-600 before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100"
+          >Inicio</a
+        >
+      </li>
+      <li class="nav-item mx-5">
+        <a
+          *ngIf="cambiarHeader()"
+          routerLink="/propiedades"
+          class="relative inline cursor-pointer text-l font-medium before:bg-violet-600 before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100"
+          >Propiedades</a
+        >
+      </li>
+    </ul>
+    <div class="flex">
+      <a routerLink="login" class="mx-4" *ngIf="!cambiarHeader()">
+        <button
+          class="relative inline cursor-pointer text-l font-medium before:bg-violet-600 before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100"
+        >
+          Iniciar Sesión
+        </button>
+      </a>
+      <a routerLink="registro" class="mx-4" *ngIf="!cambiarHeader()">
+        <button
+          class="relative inline cursor-pointer text-l font-medium before:bg-violet-600 before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100"
+        >
+          Registrarse
+        </button>
+      </a>
+      <a
+        ><button
+          (click)="logout()"
+          *ngIf="cambiarHeader()"
+          class="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+        >
+          Log Out
+        </button></a
+      >
+    </div>
+  </div>
+</header>
