@@ -138,19 +138,19 @@ router.post("/", async (req, res) => {
  *         description: Error interno del servidor
  */
 router.get("/:email", async (req, res) => {
-    try {
-      const { email } = req.params;
-      let user = await User.findOne({ email: email });
-  
-      if (user) {
-        res.status(200).json(user);
-      } else {
-        res.status(400).json({ error: "User does not exist" });
-      }
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Internal Server Error" });
+  try {
+    const { email } = req.params;
+    let user = await User.findOne({ email: email });
+
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(400).json({ error: "User does not exist" });
     }
-  });
-  
-  module.exports = router;
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+module.exports = router;
