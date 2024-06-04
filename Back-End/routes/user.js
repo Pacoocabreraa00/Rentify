@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user");
 
-// Creamos el método post para registrar un usuario
 /**
  * @openapi
  * /api/v1/user/:

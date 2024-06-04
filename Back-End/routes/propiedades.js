@@ -19,8 +19,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-// Ruta POST para crear una nueva propiedad
 /**
  * @openapi
  * /api/v1/propiedad:
@@ -104,8 +102,6 @@ router.post("/", upload.array("propertyImages", 12), async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
-
-// Ruta GET para obtener propiedades por ID de propietario
 /**
  * @openapi
  * /api/v1/propiedad/{propietario}:
