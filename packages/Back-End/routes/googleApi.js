@@ -1,10 +1,60 @@
-// routes/googleApi.js
 const express = require("express");
 const axios = require("axios");
 require("dotenv").config();
 
 const router = express.Router();
 
+/**
+ * @openapi
+ * /api/v1/google/autocomplete:
+ *   get:
+ *     tags:
+ *       - Autocomplete
+ *     summary: Autocompleta lugares usando la API de Google Places
+ *     description: Obtiene sugerencias de autocompletado de lugares a partir de una entrada de texto
+ *     parameters:
+ *       - name: input
+ *         in: query
+ *         required: true
+ *         description: Texto de entrada para autocompletar
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Respuesta exitosa con sugerencias de autocompletado
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 predictions:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       description:
+ *                         type: string
+ *                       place_id:
+ *                         type: string
+ *       400:
+ *         description: Error en la solicitud debido a parámetros faltantes
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *       500:
+ *         description: Error al obtener datos de la API de Google
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ */
 router.get("/autocomplete", async (req, res) => {
   const { input } = req.query;
 

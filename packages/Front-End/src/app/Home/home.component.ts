@@ -4,6 +4,7 @@ import { PropiedadService } from '../services/propiedad.service';
 import { NgFor, NgIf } from '@angular/common';
 import { CardPropiedadesComponent } from '../propiedades/cards-propiedades/cards-propiedades.component';
 import { PropiedadModalComponent } from '../propiedades/propiedad-modal/propiedad-modal.component';
+import Swal from 'sweetalert2'
 
 interface FilterCriteria {
   location: string;
@@ -21,6 +22,8 @@ interface FilterCriteria {
 export class HomeComponent implements OnInit {
   propiedades: Propiedad[] = [];
   selectedPropiedad: Propiedad | null = null;
+  cookiesAccepted = false;
+
 
   constructor(private service: PropiedadService) {}
 
