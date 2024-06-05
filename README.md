@@ -281,7 +281,6 @@ cd Rentify
     ```env
     PORT=5000
     MONGO_URI=<your_mongodb_uri>
-    JWT_SECRET=<your_jwt_secret>
     ```
 
 4. Inicia el servidor backend.
