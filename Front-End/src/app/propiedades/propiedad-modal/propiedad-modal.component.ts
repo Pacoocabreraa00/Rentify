@@ -1,12 +1,11 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Propiedad } from '../../models/propiedad.model';
-import { GoogleMapsModule } from '@angular/google-maps';
 
 @Component({
   selector: 'app-propiedad-modal',
   standalone: true,
-  imports: [CommonModule,GoogleMapsModule],
+  imports: [CommonModule],
   templateUrl: './propiedad-modal.component.html',
   styleUrls: ['./propiedad-modal.component.css']
 })
@@ -48,9 +47,4 @@ export class PropiedadModalComponent implements OnInit, OnDestroy {
   nextImage() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.propiedad.imagenes.length;
   }
-  options: google.maps.MapOptions = {
-    mapId: "c684e4663253c512",
-    center: { lat: 37.4871176, lng: -5.9447748},
-    zoom: 4,
-  };
 }

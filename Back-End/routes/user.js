@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { User } = require("../models/user");
-
+const bcrypt = require("bcrypt");
+const SALT_ROUNDS = 10;
 /**
  * @openapi
  * /api/v1/user/:
@@ -78,11 +79,11 @@ router.post("/", async (req, res) => {
         error: "Password must contain at least one uppercase letter, one lowercase letter, and one number"
       });
     }
-
+    const hashedPassword = await bcrypt.hash(req.body.password, SALT_ROUNDS);
     user = new User({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      password: hashedPassword,
       nacionalidad: req.body.nacionalidad,
     });
 

@@ -7,7 +7,6 @@ import { routes } from './app/app.routes';
 import { ConfigService } from './app/services/config.service';
 import { APP_INITIALIZER } from '@angular/core';
 
-
 export function initializeApp(configService: ConfigService) {
   return (): Promise<void> => configService.loadConfig();
 }
