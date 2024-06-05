@@ -308,7 +308,7 @@ cd Rentify
 
     ```bash
     npm start
-    ```
+    ``` 
 
 ## Contribuir 
 
