@@ -310,7 +310,7 @@ cd Rentify
     npm start
     ```
 
-## Contribuir
+## Contribuir 
 
 1. Haz un fork del proyecto.
 2. Crea una rama para tu nueva funcionalidad (`git checkout -b feature/nueva-funcionalidad`).
