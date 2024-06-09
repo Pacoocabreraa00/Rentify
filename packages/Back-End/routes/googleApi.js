@@ -68,7 +68,7 @@ router.get("/autocomplete", async (req, res) => {
       {
         params: {
           input,
-          key: process.env.GOOGLE_API_KEY, // Asegúrate de tener esta clave en tu archivo .env
+          key: process.env.GOOGLE_API_KEY,
         },
       }
     );

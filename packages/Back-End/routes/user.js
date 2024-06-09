@@ -60,11 +60,10 @@ router.post("/", async (req, res) => {
   if (req.body) {
     // Buscamos si existe el correo o el usuario
     let user = await User.findOne({ email: req.body.email });
-    let nameexists = await User.findOne({ name: req.body.name });
 
     // Devolvemos error si ya existe el correo o usuario
-    if (user || nameexists) {
-      return res.status(400).json({ error: "Email or username already exists" });
+    if (user) {
+      return res.status(400).json({ error: "Email  already exists" });
     }
 
     // Devolvemos error si la contraseña no cumple con los requisitos
