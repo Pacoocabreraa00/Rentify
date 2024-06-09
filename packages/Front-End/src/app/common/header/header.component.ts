@@ -3,8 +3,6 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { NgIf } from '@angular/common';
 
-
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -13,14 +11,15 @@ import { NgIf } from '@angular/common';
     NgIf
   ],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
-
 export class HeaderComponent {
-  constructor( private auth: AuthService) {}
+  constructor(private auth: AuthService) {}
+
   logout() {
     this.auth.logout();
   }
+
   cambiarHeader(): boolean {
     return this.auth.isLogged();
   }

@@ -5,6 +5,7 @@
     <img src="../../../assets/logo.png" alt="" class="w-12 h-12 mr-2" />
     <img src="../../../assets/Nombre.png" alt="" class="w-32 h-12" />
   </a>
+
   <button
     class="navbar-toggler md:hidden"
     type="button"
@@ -13,6 +14,7 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="navbar-collapse md:flex md:items-center md:ml-auto" id="menu">
     <ul class="navbar-nav flex">
       <li class="nav-item mx-5">
@@ -22,6 +24,7 @@
           >Inicio</a
         >
       </li>
+
       <li class="nav-item mx-5">
         <a
           *ngIf="cambiarHeader()"
@@ -31,6 +34,7 @@
         >
       </li>
     </ul>
+
     <div class="flex">
       <a routerLink="login" class="mx-4" *ngIf="!cambiarHeader()">
         <button
@@ -39,6 +43,7 @@
           Iniciar Sesión
         </button>
       </a>
+
       <a routerLink="registro" class="mx-4" *ngIf="!cambiarHeader()">
         <button
           class="relative inline cursor-pointer text-l font-medium before:bg-violet-600 before:absolute before:-bottom-1 before:block before:h-[2px] before:w-full before:origin-bottom-right before:scale-x-0 before:transition before:duration-300 before:ease-in-out hover:before:origin-bottom-left hover:before:scale-x-100"
@@ -46,6 +51,7 @@
           Registrarse
         </button>
       </a>
+
       <a
         ><button
           (click)="logout()"

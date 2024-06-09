@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Importa CommonModule
 import { Propiedad } from '../models/propiedad.model';
 import { PropiedadService } from '../services/propiedad.service';
-import { NgFor, NgIf } from '@angular/common';
 import { CardPropiedadesComponent } from '../propiedades/cards-propiedades/cards-propiedades.component';
 import { PropiedadModalComponent } from '../propiedades/propiedad-modal/propiedad-modal.component';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 interface FilterCriteria {
   location: string;
@@ -15,15 +15,19 @@ interface FilterCriteria {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [NgFor, NgIf, CardPropiedadesComponent, PropiedadModalComponent],
+  imports: [
+    CommonModule, // Asegúrate de importar CommonModule aquí
+    CardPropiedadesComponent,
+    PropiedadModalComponent,
+  ],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
   propiedades: Propiedad[] = [];
   selectedPropiedad: Propiedad | null = null;
   cookiesAccepted = false;
-
+  showModal = false;
 
   constructor(private service: PropiedadService) {}
 
@@ -36,6 +40,13 @@ export class HomeComponent implements OnInit {
         console.error(err);
       }
     });
+
+    const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+    if (!cookiesAccepted || cookiesAccepted !== 'true') {
+      this.showModal = true;
+    } else {
+      this.cookiesAccepted = true;
+    }
   }
 
   openModal(propiedad: Propiedad) {
@@ -44,5 +55,17 @@ export class HomeComponent implements OnInit {
 
   closeModal() {
     this.selectedPropiedad = null;
+  }
+
+  acceptCookies() {
+    this.cookiesAccepted = true;
+    localStorage.setItem('cookiesAccepted', 'true');
+    this.showModal = false;
+  }
+
+  declineCookies() {
+    this.cookiesAccepted = false;
+    localStorage.removeItem('cookiesAccepted');
+    this.showModal = false;
   }
 }
