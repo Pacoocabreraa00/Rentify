@@ -1,0 +1,9 @@
+#gif {
+    background-image: url("../../assets/QHF.gif");
+    background-size: cover;
+    background-position: center;
+    height: 700px; 
+    width: 100%;
+    border-radius: 8px; 
+  }
+  

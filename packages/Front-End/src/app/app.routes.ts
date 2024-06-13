@@ -6,12 +6,17 @@ import { AuthGuard } from './guard/guard.guard';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { PropiedadesComponent } from './propiedades/propiedades.component';
 import { CrearPropiedadComponent } from './propiedades/crear-propiedad/crear-propiedad.component';
+import { ListadoPropiedadesComponent } from './listado-propiedades/listado-propiedades.component';
 
 export const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'listado-propiedades',
+    component: ListadoPropiedadesComponent,
   },
   {
     path: 'login',
