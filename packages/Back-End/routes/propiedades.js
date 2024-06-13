@@ -102,6 +102,16 @@ router.post("/", upload.array("propertyImages", 12), async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+router.get('/search', async (req, res) => {
+  const searchTerm = req.query.term;
+  try {
+    const propiedades = await Propiedad.find({ nombre: new RegExp('^' + searchTerm, 'i') });
+    return res.status(200).json(propiedades);
+  } catch (error) {
+    console.error('Error al buscar propiedades:', error.message);
+    return res.status(500).json({ error: error.message });
+  }
+});
 /**
  * @openapi
  * /api/v1/propiedad/{propietario}:
