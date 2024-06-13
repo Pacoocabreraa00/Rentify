@@ -18,7 +18,11 @@ export class PropiedadService {
       catchError(this.handleError)
     );
   }
-
+  searchPropiedades(term: string): Observable<Propiedad[]> {
+    return this.http.get<Propiedad[]>(`${this.apiUrl}/search?term=${term}`).pipe(
+      catchError(this.handleError)
+    );
+  }
   postPropiedad(propiedad: FormData): Observable<Propiedad> {
     return this.http.post<Propiedad>(this.apiUrl, propiedad).pipe(
       catchError(this.handleError)

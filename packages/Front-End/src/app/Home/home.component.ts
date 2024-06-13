@@ -1,60 +1,25 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
-import { Propiedad } from '../models/propiedad.model';
-import { PropiedadService } from '../services/propiedad.service';
-import { CardPropiedadesComponent } from '../propiedades/cards-propiedades/cards-propiedades.component';
-import { PropiedadModalComponent } from '../propiedades/propiedad-modal/propiedad-modal.component';
-import Swal from 'sweetalert2';
-
-interface FilterCriteria {
-  location: string;
-  maxPrice: number;
-  type: string;
-}
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
-    CommonModule, // Asegúrate de importar CommonModule aquí
-    CardPropiedadesComponent,
-    PropiedadModalComponent,
-  ],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'] // Notice the correction here to `styleUrls`
 })
 export class HomeComponent implements OnInit {
-  propiedades: Propiedad[] = [];
-  selectedPropiedad: Propiedad | null = null;
   cookiesAccepted = false;
   showModal = false;
 
-  constructor(private service: PropiedadService) {}
-
-  ngOnInit() {
-    this.service.getPropiedadesNE(localStorage.getItem('id')).subscribe({
-      next: (res: Propiedad[]) => {
-        this.propiedades = res;
-      },
-      error: (err: any) => {
-        console.error(err);
-      }
-    });
-
+  ngOnInit(): void {
     const cookiesAccepted = localStorage.getItem('cookiesAccepted');
     if (!cookiesAccepted || cookiesAccepted !== 'true') {
       this.showModal = true;
     } else {
       this.cookiesAccepted = true;
     }
-  }
-
-  openModal(propiedad: Propiedad) {
-    this.selectedPropiedad = propiedad;
-  }
-
-  closeModal() {
-    this.selectedPropiedad = null;
   }
 
   acceptCookies() {
@@ -66,6 +31,10 @@ export class HomeComponent implements OnInit {
   declineCookies() {
     this.cookiesAccepted = false;
     localStorage.removeItem('cookiesAccepted');
+    this.showModal = false;
+  }
+  
+  closeModal() {
     this.showModal = false;
   }
 }
